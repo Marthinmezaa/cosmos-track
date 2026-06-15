@@ -1,11 +1,12 @@
 const Contacto = require('../models/contacto');
 const { sendContactEmail } = require('../config/mailer');
+const { sendWhatsAppNotification } = require('../config/whatsapp');
 
 const submitForm = async (req, res) => {
     try {
         const formData = req.body;
 
-        // 1. Guardar en Base de Datos (Neon)
+        // 1. Guardar en Base de Datos (MySQL)
         const savedContact = await Contacto.create(formData);
 
         // 2. Enviar Correo
@@ -14,6 +15,15 @@ const submitForm = async (req, res) => {
         } catch (emailError) {
             console.error('Error al enviar correo, pero el contacto fue guardado:', emailError);
             // No bloqueamos la respuesta si solo falla el correo
+        }
+
+        // 3. Enviar WhatsApp (solo para cotizaciones)
+        if (formData.tipo_formulario === 'cotizacion') {
+            try {
+                await sendWhatsAppNotification(formData);
+            } catch (waError) {
+                console.error('Error al enviar WhatsApp:', waError);
+            }
         }
 
         res.status(201).json({

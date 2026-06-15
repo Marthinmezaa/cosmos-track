@@ -2,12 +2,12 @@ const db = require('../config/db');
 
 const Contacto = {
     create: async (data) => {
-        const { nombre, email, telefono, asunto, mensaje, servicio, tipo_formulario } = data;
+        const { nombre, apellido, email, telefono, asunto, mensaje, servicio, tipo_formulario } = data;
         const query = `
-            INSERT INTO contactos (nombre, email, telefono, asunto, mensaje, servicio, tipo_formulario)
-            VALUES (?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO contactos (nombre, apellido, email, telefono, asunto, mensaje, servicio, tipo_formulario)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
         `;
-        const values = [nombre, email, telefono, asunto, mensaje, servicio, tipo_formulario];
+        const values = [nombre, apellido || null, email, telefono, asunto, mensaje, servicio, tipo_formulario];
         const res = await db.query(query, values);
 
         // MySQL no tiene RETURNING, devolvemos el id insertado y los datos

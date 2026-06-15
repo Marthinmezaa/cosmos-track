@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = {
                 servicio: quoteForm.querySelector('select').value,
                 nombre: document.getElementById('txtNombre').value,
+                apellido: document.getElementById('txtApellido').value,
                 telefono: document.getElementById('txtTelefono').value,
                 tipo_formulario: 'cotizacion',
                 asunto: 'Solicitud de Cotización'
