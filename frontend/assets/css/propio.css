@@ -62,3 +62,20 @@
     .wa-popup a:hover {
       background: #1ebe5d;
     }
+
+    /* Estilo para el botón de Acceso Cliente */
+    .default-btn.btn-cliente {
+        background-color: #2c3e50;
+        color: #ffffff;
+    }
+
+    .default-btn.btn-cliente:hover {
+        background-color: #34495e;
+        color: #ffffff;
+    }
+
+    /* Ajuste para modo oscuro si es necesario */
+    [data-theme='dark'] .default-btn.btn-cliente {
+        background-color: #ecf0f1;
+        color: #2c3e50;
+    }
