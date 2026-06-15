@@ -5,12 +5,16 @@ const Contacto = {
         const { nombre, email, telefono, asunto, mensaje, servicio, tipo_formulario } = data;
         const query = `
             INSERT INTO contactos (nombre, email, telefono, asunto, mensaje, servicio, tipo_formulario)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
-            RETURNING *;
+            VALUES (?, ?, ?, ?, ?, ?, ?);
         `;
         const values = [nombre, email, telefono, asunto, mensaje, servicio, tipo_formulario];
         const res = await db.query(query, values);
-        return res.rows[0];
+
+        // MySQL no tiene RETURNING, devolvemos el id insertado y los datos
+        return {
+            id: res.insertId,
+            ...data
+        };
     }
 };
 
