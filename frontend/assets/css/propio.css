@@ -79,3 +79,35 @@
         background-color: #ecf0f1;
         color: #2c3e50;
     }
+
+    /* Versión de la Aplicación en Footer */
+    .copy-right-area .container {
+        position: relative;
+    }
+
+    #app-version {
+        font-size: 11px;
+        opacity: 0.4;
+        color: #ffffff;
+        position: absolute;
+        right: 15px;
+        bottom: 0px;
+        transition: opacity 0.3s ease;
+    }
+
+    #app-version:hover {
+        opacity: 0.8;
+    }
+
+    @media only screen and (max-width: 767px) {
+        #app-version {
+            position: static;
+            display: block;
+            margin-top: 5px;
+        }
+    }
+
+    /* Ajuste para que se vea bien en modo claro si es necesario */
+    [data-theme='light'] #app-version {
+        color: #000000;
+    }
