@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use('/api/form', require('./routes/formRoutes'));
+app.use('/api', require('./routes/systemRoutes'));
 
 app.get('/api/health', (req, res) => {
     res.json({ status: 'Servidor funcionando correctamente' });
