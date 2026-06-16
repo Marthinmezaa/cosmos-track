@@ -6,12 +6,12 @@
       background: #25d366;
       color: #fff;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 30px;
+      font-size: 24px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       cursor: pointer;
       z-index: 1000;
@@ -24,7 +24,7 @@
     /* Popup */
     .wa-popup {
       position: fixed;
-      bottom: 90px;
+      bottom: 80px;
       right: 20px;
       width: 260px;
       background: #fff;
