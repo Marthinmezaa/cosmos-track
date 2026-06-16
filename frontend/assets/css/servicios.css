@@ -1,0 +1,164 @@
+:root {
+    --primary-color: #0383ff;
+    --secondary-color: #000024;
+    --bg-light: #ffffff;
+    --bg-section-light: #f9fafb;
+    --text-color: #555555;
+    --heading-color: #000024;
+    --card-bg: #ffffff;
+    --transition: all 0.3s ease;
+}
+
+.theme-dark {
+    --bg-light: #000000;
+    --bg-section-light: #0e0e0e;
+    --text-color: #f1f1f1;
+    --heading-color: #ffffff;
+    --card-bg: #1a1919;
+}
+
+/* ==================================================
+   Sección Puente en Home
+   ================================================== */
+.solutions-bridge {
+    padding: 100px 0;
+    text-align: center;
+    background-color: var(--bg-section-light);
+}
+
+.solutions-bridge .section-title {
+    margin-bottom: 40px;
+}
+
+.solutions-bridge p {
+    max-width: 800px;
+    margin: 0 auto 30px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* ==================================================
+   Página de Servicios
+   ================================================== */
+.services-hero {
+    padding: 150px 0 80px;
+    background-color: var(--bg-section-light);
+    text-align: center;
+}
+
+.services-hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--heading-color);
+}
+
+.services-hero p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+/* Grid de Tarjetas */
+.services-grid-container {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-bottom: 3px solid transparent;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-bottom-color: var(--primary-color);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+}
+
+.service-card .icon-box {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.service-card .icon-box img {
+    max-width: 80px;
+    height: auto;
+}
+
+.service-card h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    text-align: center;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--heading-color);
+    text-transform: uppercase;
+}
+
+.service-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-card ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.service-card ul li::before {
+    content: "\eb27"; /* Boxicons bx-check-double o similar */
+    font-family: 'boxicons' !important;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.service-card ul li strong {
+    display: block;
+    color: var(--heading-color);
+    margin-bottom: 2px;
+}
+
+/* Asegurar suavidad en transiciones de tema */
+body, .service-card, .solutions-bridge, .services-hero, .services-grid-container {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Legibilidad Dark Mode */
+.theme-dark .service-card {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+}
