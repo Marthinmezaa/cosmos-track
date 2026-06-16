@@ -34,11 +34,12 @@ jobs:
         with:
           node-version: '20' # Utiliza la versión LTS más estable
 
-      # 4. Instalar las librerías de tu proyecto (Express, MySQL2, etc.)
+      # 4. Instalar las librerías de tu proyecto
       - name: Instalar Dependencias
-        run: npm ci || npm install
+        working-directory: ./backend # Cambia "backend" por el nombre real de tu carpeta
+        run: npm install
 
-      # 5. ANÁLISIS DE VULNERABILIDADES (SCA - Software Composition Analysis)
-      # Revisa si alguna de las librerías que usas tiene vulnerabilidades conocidas.
-      - name: 🛡️ Auditoría de Seguridad de Dependencias (npm audit)
+      # 5. ANÁLISIS DE VULNERABILIDADES
+      - name: Auditoría de Seguridad de Dependencias (npm audit)
+        working-directory: ./backend # Cambia "backend" por el nombre real de tu carpeta
         run: npm audit --audit-level=high
