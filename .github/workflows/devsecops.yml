@@ -1,0 +1,45 @@
+name: Escudo DevSecOps - Cosmos Trak
+
+# El flujo se activará cada vez que subas código a la rama principal (main)
+# o cuando alguien haga un Pull Request.
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  seguridad_y_analisis:
+    name: Análisis de Seguridad y Código
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descarga tu código al servidor virtual de GitHub Actions
+      - name: Obtener el código fuente
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Necesario para escanear todo el historial de commits
+
+      # 2. ESCANEO DE SECRETOS (Secret Scanning)
+      # Busca contraseñas, tokens, o credenciales de MySQL que se hayan subido por accidente.
+      - name: Escaneo de Credenciales Expuestas (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
+
+      # 3. Preparar el entorno para tu Backend
+      - name: Configurar entorno Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Utiliza la versión LTS más estable
+
+      # 4. Instalar las librerías de tu proyecto
+      - name: Instalar Dependencias
+        working-directory: ./backend # Cambia "backend" por el nombre real de tu carpeta
+        run: npm install
+
+      # 5. ANÁLISIS DE VULNERABILIDADES
+      - name: Auditoría de Seguridad de Dependencias (npm audit)
+        working-directory: ./backend # Cambia "backend" por el nombre real de tu carpeta
+        run: npm audit --audit-level=high
