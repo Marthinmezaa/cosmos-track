@@ -4,15 +4,17 @@ Bienvenido al repositorio de la web institucional de **Cosmos Trak**, empresa l�
 
 Este proyecto comprende una plataforma moderna, con diseño adaptativo (Mobile-First) y funcionalidades interactivas para el contacto y cotización de servicios.
 
-## 🚀 Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 ### Frontend
+
 - **HTML5 y CSS3 puro:** Sin frameworks pesados para garantizar la máxima velocidad de carga.
 - **Diseño Mobile-First:** Optimizado para una experiencia fluida en smartphones y tablets.
 - **Dark Mode:** Soporte nativo para modo oscuro basado en preferencias del usuario o selector manual.
 - **Vanilla JS & jQuery:** Para manejo de DOM, validaciones y animaciones.
 
 ### Backend
+
 - **Node.js & Express:** Servidor robusto y escalable.
 - **MySQL:** Base de datos para la gestión de contactos y cotizaciones.
 - **Nodemailer:** Sistema de notificaciones por correo electrónico.
@@ -20,7 +22,7 @@ Este proyecto comprende una plataforma moderna, con diseño adaptativo (Mobile-F
 
 ---
 
-## 🛠️ Infraestructura y DevOps
+## Infraestructura y DevOps
 
 Nuestra infraestructura sigue prácticas modernas de **DevSecOps** para garantizar la seguridad y estabilidad del código:
 
@@ -31,17 +33,19 @@ Nuestra infraestructura sigue prácticas modernas de **DevSecOps** para garantiz
 
 ---
 
-## 💻 Configuración del Entorno de Desarrollo
+## Configuración del Entorno de Desarrollo
 
 Para clonar y ejecutar este proyecto localmente, sigue estos pasos:
 
 ### Pre-requisitos
+
 - Node.js (v18 o superior recomendado)
 - MySQL Server
 
 ### Pasos de Instalación
 
 1. **Clonar el repositorio:**
+
    ```bash
    git clone https://github.com/tu-usuario/cosmos-trak.git
    cd cosmos-trak
@@ -49,6 +53,7 @@ Para clonar y ejecutar este proyecto localmente, sigue estos pasos:
 
 2. **Configurar el Backend:**
    Entra en la carpeta del backend e instala las dependencias:
+
    ```bash
    cd backend
    npm install
@@ -56,6 +61,7 @@ Para clonar y ejecutar este proyecto localmente, sigue estos pasos:
 
 3. **Variables de Entorno:**
    Crea un archivo `.env` en la carpeta `backend/` basándote en el siguiente esquema:
+
    ```env
    PORT=3000
    DB_HOST=localhost
@@ -83,14 +89,15 @@ Para clonar y ejecutar este proyecto localmente, sigue estos pasos:
 
 ---
 
-## 🔗 Enlaces Relevantes
+## Enlaces Relevantes
 
 - **Portal de Clientes (Trakzee):** [Acceso a Cliente](https://trakzee.uffizio.com/jsp/trakzee_login.jsp)
 - **Sitio Web Oficial:** [cosmostrak.com.py](https://www.cosmostrak.com.py)
 
 ---
 
-## 📧 Contacto
+## Contacto
+
 Si tienes dudas sobre el desarrollo de este proyecto, puedes contactar a **Marthin Meza**.
 
 Desarrollado con ❤️ para Cosmos Trak.
