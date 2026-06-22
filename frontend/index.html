@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="assets/css/odometer.min.css">
 		<link rel="stylesheet" href="assets/css/style.css">
 		<link rel="stylesheet" href="assets/css/dark.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		<link rel="stylesheet" href="assets/css/servicios.css">
 		<link rel="stylesheet" href="assets/css/propio.css">
@@ -103,6 +104,14 @@
 									</li>
 									<li class="nav-item">
 										<a href="servicios.html" class="nav-link">Servicios</a>
+										<ul class="dropdown-menu">
+											<li class="nav-item">
+												<a href="particulares.html" class="nav-link">Particulares</a>
+											</li>
+											<li class="nav-item">
+												<a href="flotas.html" class="nav-link">Flotas</a>
+											</li>
+										</ul>
 									</li>
 									<li class="nav-item">
 										<a href="#contacto" class="nav-link">Contacto</a>
@@ -263,18 +272,36 @@
 			</div>
 		</section>
 
-		<!-- Servicios (Nuestras Soluciones Bridge) -->
+		<!-- Servicios (Portal Cards) -->
 		<div class="col-lg-12 pt-70" id="servicios"></div>
-		<section class="solutions-bridge">
+		<section class="solutions-bridge pb-100">
 			<div class="container">
-				<div class="section-title">
+				<div class="section-title" data-aos="fade-up">
 					<span>Nuestras Soluciones</span>
-					<h2>Tecnología Avanzada para tu Flota</h2>
+					<h2>Control Total: Desde tu Auto hasta tu Flota</h2>
+					<p>
+						Descubre cómo nuestra tecnología de monitoreo satelital se adapta a tus necesidades. Ya sea para la seguridad de tu familia o la rentabilidad de tu empresa, te ayudamos a gestionarlo con inteligencia.
+					</p>
 				</div>
-				<p>
-					Descubre cómo nuestra tecnología de monitoreo satelital y herramientas operativas pueden brindar seguridad, trazabilidad y mayor rentabilidad para tu flota. Si tu negocio se mueve, nosotros te ayudamos a gestionarlo con inteligencia.
-				</p>
-				<div class="text-center">
+
+				<div class="portal-container">
+					<a href="particulares.html" class="portal-card" data-aos="fade-right">
+						<div class="portal-bg" style="background-image: url('assets/img/portals/particular.jpg');"></div>
+						<div class="portal-overlay"></div>
+						<div class="portal-content">
+							<h3>Vehículos Particulares</h3>
+						</div>
+					</a>
+					<a href="flotas.html" class="portal-card" data-aos="fade-left">
+						<div class="portal-bg" style="background-image: url('assets/img/portals/flota.jpg');"></div>
+						<div class="portal-overlay"></div>
+						<div class="portal-content">
+							<h3>Flotas Corporativas</h3>
+						</div>
+					</a>
+				</div>
+
+				<div class="text-center mt-5" data-aos="fade-up">
 					<a href="servicios.html" class="default-btn">
 						<span>Ver todos nuestros servicios</span>
 					</a>
@@ -510,6 +537,14 @@
 		<script src="assets/js/ajaxchimp.min.js"></script>
         <!-- Custom JS -->
 		<script src="assets/js/custom.js"></script>
+		<!-- AOS JS -->
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script>
+			AOS.init({
+				duration: 1000,
+				once: true,
+			});
+		</script>
 		<!-- Version Handler -->
 		<script src="assets/js/version-handler.js"></script>
     </body>

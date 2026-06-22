@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Recoger datos
             const formData = {
                 nombre: document.getElementById('name').value,
-                email: document.getElementById('email').value,
+                email: document.getElementById('email') ? document.getElementById('email').value : '',
                 telefono: document.getElementById('phone_number').value,
-                asunto: document.getElementById('msg_subject').value,
+                asunto: document.getElementById('msg_subject') ? document.getElementById('msg_subject').value : 'Contacto desde Web',
                 mensaje: document.getElementById('message').value,
                 tipo_formulario: 'contacto'
             };
@@ -20,24 +20,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Manejar el formulario de cotización (el de arriba)
-    const quoteForm = document.querySelector('.courses-form');
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', function(event) {
+    // Manejar el formulario de cotización (el de arriba) o instalación
+    const quoteForms = document.querySelectorAll('.courses-form, #installForm');
+    quoteForms.forEach(form => {
+        form.addEventListener('submit', function(event) {
             event.preventDefault();
 
             const formData = {
-                servicio: quoteForm.querySelector('select').value,
-                nombre: document.getElementById('txtNombre').value,
-                apellido: document.getElementById('txtApellido').value,
-                telefono: document.getElementById('txtTelefono').value,
-                tipo_formulario: 'cotizacion',
-                asunto: 'Solicitud de Cotización'
+                servicio: form.querySelector('select') ? form.querySelector('select').value : '',
+                nombre: form.querySelector('[name="txtNombre"]') ? form.querySelector('[name="txtNombre"]').value : '',
+                apellido: form.querySelector('[name="txtApellido"]') ? form.querySelector('[name="txtApellido"]').value : '',
+                telefono: form.querySelector('[name="txtTelefono"]') ? form.querySelector('[name="txtTelefono"]').value : '',
+                mensaje: form.querySelector('[name="message"]') ? form.querySelector('[name="message"]').value : '',
+                tipo_formulario: form.querySelector('[name="tipo_formulario"]') ? form.querySelector('[name="tipo_formulario"]').value : 'cotizacion',
+                asunto: form.querySelector('[name="asunto"]') ? form.querySelector('[name="asunto"]').value : 'Solicitud de Cotización'
             };
 
-            submitFormData(formData, quoteForm);
+            submitFormData(formData, form);
         });
-    }
+    });
 
     function submitFormData(data, formElement) {
         // Mostrar estado de carga
