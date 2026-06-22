@@ -2,12 +2,16 @@
 	'use strict';
 
 	// Mean Menu JS
-	$('.mean-menu').meanmenu({ 
-		meanScreenWidth: "991"
-	});
+	if ($('.mean-menu').length > 0 && typeof $.fn.meanmenu === 'function') {
+		$('.mean-menu').meanmenu({
+			meanScreenWidth: "991"
+		});
+	}
 
 	// Nice Select JS
-	$('select').niceSelect();
+	if ($('select').length > 0 && typeof $.fn.niceSelect === 'function') {
+		$('select').niceSelect();
+	}
 	
 	// Header Sticky, Go To Top JS JS
 	$(window).on('scroll', function() {
@@ -26,68 +30,72 @@
 	});
 
 	// Choose Us Slider JS
-	$('.choose-us-slider').owlCarousel({
-		loop: true,
-		margin: 30,
-		nav: false,
-		dots: true,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		navText: [
-			"<i class='bx bx-chevron-left'></i>",
-			"<i class='bx bx-chevron-right'></i>",
-		],
-		responsive:{
-			0: {
-				items: 1,
-			},
-			414: {
-				items: 2,
-			},
-			576: {
-				items: 3,
-			},
-			768: {
-				items: 3,
-			},
-			992: {
-				items: 2,
-			},
-			1200: {
-				items: 3,
+	if ($('.choose-us-slider').length > 0 && typeof $.fn.owlCarousel === 'function') {
+		$('.choose-us-slider').owlCarousel({
+			loop: true,
+			margin: 30,
+			nav: false,
+			dots: true,
+			autoplay: true,
+			smartSpeed: 1000,
+			autoplayHoverPause: true,
+			navText: [
+				"<i class='bx bx-chevron-left'></i>",
+				"<i class='bx bx-chevron-right'></i>",
+			],
+			responsive:{
+				0: {
+					items: 1,
+				},
+				414: {
+					items: 2,
+				},
+				576: {
+					items: 3,
+				},
+				768: {
+					items: 3,
+				},
+				992: {
+					items: 2,
+				},
+				1200: {
+					items: 3,
+				}
 			}
-		}
-	});
+		});
+	}
 
 
 	// Related Product JS
-	$('.related-product').owlCarousel({
-		loop: true,
-		margin: 30,
-		nav: false,
-		dots: false,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		responsive:{
-			0: {
-				items: 1,
-			},
-			576: {
-				items: 2,
-			},
-			768: {
-				items: 2,
-			},
-			992: {
-				items: 3,
-			},
-			1200: {
-				items: 3,
-			},
-		},
-	});
+	if ($('.related-product').length > 0 && typeof $.fn.owlCarousel === 'function') {
+		$('.related-product').owlCarousel({
+			loop: true,
+			margin: 30,
+			nav: false,
+			dots: false,
+			autoplay: true,
+			smartSpeed: 1000,
+			autoplayHoverPause: true,
+			responsive:{
+				0: {
+					items: 1,
+				},
+				576: {
+					items: 2,
+				},
+				768: {
+					items: 2,
+				},
+				992: {
+					items: 3,
+				},
+				1200: {
+					items: 3,
+				},
+			}
+		});
+	}
 
 	// Click Event JS
 	$('.go-top').on('click', function() {
@@ -145,16 +153,18 @@
 	})
 
 	// Subscribe form JS
-	$(".newsletter-form").validator().on("submit", function (event) {
-		if (event.isDefaultPrevented()) {
-		// handle the invalid form...
-			formErrorSub();
-			submitMSGSub(false, "Please enter your email correctly.");
-		} else {
-			// everything looks good!
-			event.preventDefault();
-		}
-	});
+	if ($('.newsletter-form').length > 0 && typeof $.fn.validator === 'function') {
+		$(".newsletter-form").validator().on("submit", function (event) {
+			if (event.isDefaultPrevented()) {
+				// handle the invalid form...
+				formErrorSub();
+				submitMSGSub(false, "Please enter your email correctly.");
+			} else {
+				// everything looks good!
+				event.preventDefault();
+			}
+		});
+	}
 	function callbackFunction (resp) {
 		if (resp.result === "success") {
 			formSuccessSub();
@@ -186,10 +196,12 @@
 	}
 	
 	// AJAX MailChimp JS
-	$(".newsletter-form").ajaxChimp({
-		url: "https://Envy Theme.us20.list-manage.com/subscribe/post?u=60e1ffe2e8a68ce1204cd39a5&amp;id=42d6d188d9", // Your url MailChimp
-		callback: callbackFunction
-	});
+	if ($('.newsletter-form').length > 0 && typeof $.fn.ajaxChimp === 'function') {
+		$(".newsletter-form").ajaxChimp({
+			url: "https://Envy Theme.us20.list-manage.com/subscribe/post?u=60e1ffe2e8a68ce1204cd39a5&amp;id=42d6d188d9", // Your url MailChimp
+			callback: callbackFunction
+		});
+	}
 
 	// Input Plus & Minus Number JS
 	$('.input-counter').each(function() {
@@ -223,13 +235,15 @@
 	});
 
 	// Odometer JS
-	$('.odometer').appear(function(e) {
-		var odo = $(".odometer");
-		odo.each(function() {
-			var countNumber = $(this).attr("data-count");
-			$(this).html(countNumber);
+	if ($('.odometer').length > 0 && typeof $.fn.appear === 'function') {
+		$('.odometer').appear(function(e) {
+			var odo = $(".odometer");
+			odo.each(function() {
+				var countNumber = $(this).attr("data-count");
+				$(this).html(countNumber);
+			});
 		});
-	});
+	}
 
 	// Others Option For Responsive JS
 	$(".others-option-for-responsive .dot-menu").on("click", function(){
@@ -237,7 +251,7 @@
 	});
 
 	// WOW JS
-	if($('.wow').length){
+	if($('.wow').length && typeof WOW === 'function'){
 		var wow = new WOW({
 			mobile: false
 		});
@@ -245,58 +259,68 @@
 	}
 
 	// Popup Video JS
-	$('.popup-youtube, .popup-vimeo').magnificPopup({
-		disableOn: 300,
-		type: 'iframe',
-		mainClass: 'mfp-fade',
-		removalDelay: 160,
-		preloader: false,
-		fixedContentPos: false,
-	});
+	if ($('.popup-youtube, .popup-vimeo').length > 0 && typeof $.fn.magnificPopup === 'function') {
+		$('.popup-youtube, .popup-vimeo').magnificPopup({
+			disableOn: 300,
+			type: 'iframe',
+			mainClass: 'mfp-fade',
+			removalDelay: 160,
+			preloader: false,
+			fixedContentPos: false,
+		});
+	}
 
 	// Product View Slider JS
-	var bigimage = $("#big");
-	var thumbs = $("#thumbs");
-	// Var Totalslides = 10;
-	var syncedSecondary = true;
-	
-	bigimage
-		.owlCarousel({
-		items: 1,
-		slideSpeed: 2000,
-		nav: true,
-		autoplay: true,
-		dots: false,
-		loop: true,
-		responsiveRefreshRate: 200,
-		navText: [
-			"<i class='bx bx-left-arrow-alt'></i>",
-			"<i class='bx bx-right-arrow-alt'></i>",
-		]
-	})
-	.on("changed.owl.carousel", syncPosition);
-	
-	thumbs
-		.on("initialized.owl.carousel", function() {
+	if ($('#big').length > 0 && $('#thumbs').length > 0 && typeof $.fn.owlCarousel === 'function') {
+		var bigimage = $("#big");
+		var thumbs = $("#thumbs");
+		// Var Totalslides = 10;
+		var syncedSecondary = true;
+
+		bigimage
+			.owlCarousel({
+				items: 1,
+				slideSpeed: 2000,
+				nav: true,
+				autoplay: true,
+				dots: false,
+				loop: true,
+				responsiveRefreshRate: 200,
+				navText: [
+					"<i class='bx bx-left-arrow-alt'></i>",
+					"<i class='bx bx-right-arrow-alt'></i>",
+				]
+			})
+			.on("changed.owl.carousel", syncPosition);
+
 		thumbs
-		.find(".owl-item")
-		.eq(0)
-		.addClass("current");
-	})
-	.owlCarousel({
-		items: 5,
-		dots: false,
-		nav: false,
-		navText: [
-			"<i class='bx bx-left-arrow-alt'></i>",
-			"<i class='bx bx-right-arrow-alt'></i>",
-		],
-		smartSpeed: 200,
-		slideSpeed: 500,
-		slideBy: 4,
-		responsiveRefreshRate: 100
-	})
-	.on("changed.owl.carousel", syncPosition2);
+			.on("initialized.owl.carousel", function() {
+				thumbs
+					.find(".owl-item")
+					.eq(0)
+					.addClass("current");
+			})
+			.owlCarousel({
+				items: 5,
+				dots: false,
+				nav: false,
+				navText: [
+					"<i class='bx bx-left-arrow-alt'></i>",
+					"<i class='bx bx-right-arrow-alt'></i>",
+				],
+				smartSpeed: 200,
+				slideSpeed: 500,
+				slideBy: 4,
+				responsiveRefreshRate: 100
+			})
+			.on("changed.owl.carousel", syncPosition2);
+
+		thumbs.on("click", ".owl-item", function(e) {
+			e.preventDefault();
+			var number = $(this).index();
+			bigimage.data("owl.carousel").to(number, 300, true);
+		});
+	}
 	
 	function syncPosition(el) {
 		//if loop is set to false, then you have to uncomment the next line
@@ -342,11 +366,6 @@
 			bigimage.data("owl.carousel").to(number, 100, true);
 		}
 	}
-	thumbs.on("click", ".owl-item", function(e) {
-		e.preventDefault();
-		var number = $(this).index();
-		bigimage.data("owl.carousel").to(number, 300, true);
-	});
 
 
 	// Switch Btn
