@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.2.0...v1.3.0) (2026-06-22)
+
+
+### Features
+
+* frontend updates and new landing pages for particulares and flotas ([690b89f](https://github.com/Marthinmezaa/cosmos-track/commit/690b89ff16b05a0d0a435d0e929526db0986c36a))
+
+
+### Bug Fixes
+
+* actualizar nodemailer a v9+ para mitigar vulnerabilidad de lectura de archivos (SSRF) ([b51fd25](https://github.com/Marthinmezaa/cosmos-track/commit/b51fd25ef327f076d1f6fb3fcb65cb365d92ef41))
+* actualizar nodemailer a v9+ para mitigar vulnerabilidad de lectura de archivos (SSRF)…ra de archivos (SSRF) ([f0f078e](https://github.com/Marthinmezaa/cosmos-track/commit/f0f078e366fef9215f40be702f568ad9e5f73c1b))
+* improve UI layout and sync versioning to 1.2.0 ([bc5b5ea](https://github.com/Marthinmezaa/cosmos-track/commit/bc5b5ea6677ce8cdc91869ffb7e8f7a4be213a01))
+* update nodemailer to v9.0.1 to resolve high severity vulnerability ([829a434](https://github.com/Marthinmezaa/cosmos-track/commit/829a434e408b2e47e9f1fcd094ea105c9a233573))
+
 ## [1.2.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.1.0...v1.2.0) (2026-06-16)
 
 
