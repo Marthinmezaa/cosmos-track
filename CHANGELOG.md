@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.4.0...v1.5.0) (2026-06-24)
+
+
+### Features
+
+* **ui:** optimizar interfaz, completar landing pages y actualizar contacto ([5d789f6](https://github.com/Marthinmezaa/cosmos-track/commit/5d789f64ea0bd80f5c91123c3ef2f14c10b027c7))
+* **ui:** optimizar interfaz, completar landing pages y actualizar contacto ([52b0dce](https://github.com/Marthinmezaa/cosmos-track/commit/52b0dcecc05ee1bf4742446f57e6a292df277e0c))
+
+
+### Bug Fixes
+
+* modularize custom.js and optimize script loading in subpages ([3c411fd](https://github.com/Marthinmezaa/cosmos-track/commit/3c411fdda6db837566021a0f029ec66c615e7576))
+
 ## [1.4.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.3.0...v1.4.0) (2026-06-22)
 
 
