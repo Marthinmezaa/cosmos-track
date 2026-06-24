@@ -74,13 +74,6 @@
 			</div>
 		</header>
 
-		<section class="services-hero">
-			<div class="container" data-aos="fade-down">
-				<h1>COSMOS TRAK</h1>
-				<p>Más que rastreo, inteligencia operativa para tu flota corporativa.</p>
-			</div>
-		</section>
-
 		<section class="impact-section" style="background-image: url('assets/img/portals/impacto-flota.jpg');">
 			<div class="impact-glass-card" data-aos="zoom-in">
 				<h2>Control e Inteligencia Operativa</h2>
@@ -125,56 +118,147 @@
 			</div>
 
 			<div class="cta-section">
-				<button id="btnSolicitar" class="default-btn" style="padding: 20px 60px; font-size: 20px;">
-					<span>Solicitar Instalación</span>
-				</button>
+    			<button id="btnSolicitar" class="default-btn" style="padding: 20px 60px; font-size: 20px;">
+        			<span>Solicitar Instalación</span>
+    			</button>
 
-				<div id="formContainer" class="installation-form-container">
-					<div class="courses-form">
-						<h3>Coloque sus datos para solicitar una instalación</h3>
-						<form id="installForm">
-                            <input type="hidden" name="tipo_formulario" value="cotizacion">
-                            <input type="hidden" name="asunto" value="Solicitud de Instalación - Flota">
-							<div class="form-group">
-								<label>Nombre</label>
-								<input type="text" class="form-control" name="txtNombre" id="name" required>
-							</div>
-							<div class="form-group">
-								<label>Apellido</label>
-								<input type="text" class="form-control" name="txtApellido" id="txtApellido" required>
-							</div>
-							<div class="form-group">
-								<label>Telefono</label>
-								<input type="text" class="form-control" name="txtTelefono" id="phone_number" required>
-							</div>
-                            <div class="form-group">
-								<label>Comentarios adicionales</label>
-								<textarea class="form-control" name="message" id="message" rows="3"></textarea>
-							</div>
-							<button type="submit" class="default-btn w-100">
-								<span>Enviar Solicitud</span>
-							</button>
-						</form>
-					</div>
-				</div>
+    			<div id="formContainer" class="installation-form-container">
+        			<div class="courses-form">
+            			<h3>Coloque sus datos para solicitar una instalación</h3>
+           				<form id="installForm">
+                			<input type="hidden" name="tipo_formulario" value="cotizacion">
+                			<input type="hidden" name="asunto" value="Solicitud de Instalación - Flota">
+                
+                			<div class="form-group">
+                    			<label>Tipo de vehículo</label>
+                    			<select class="form-control" name="txtTipoVehiculo" id="txtTipoVehiculo" required>
+                        			<option value="" disabled selected>Seleccione...</option>
+                        			<option value="Auto">Auto</option>
+                        			<option value="Moto">Moto</option>
+                        			<option value="Flota">Flota</option>
+                    			</select>
+                			</div>
+
+                			<div class="form-group">
+                    			<label>Nombre</label>
+                    			<input type="text" class="form-control" name="txtNombre" id="txtNombre" required>
+                			</div>
+                			<div class="form-group">
+                    			<label>Apellido</label>
+                    			<input type="text" class="form-control" name="txtApellido" id="txtApellido" required>
+                			</div>
+                			<div class="form-group">
+                    			<label>Teléfono</label>
+                    			<input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required>
+                			</div>
+                			<div class="form-group">
+                    			<label>Comentarios adicionales</label>
+                    			<textarea class="form-control" name="message" id="message" rows="3"></textarea>
+                			</div>
+
+                			<button type="submit" class="default-btn w-100">
+                    			<span>Enviar Solicitud</span>
+                			</button>
+                
+                			<div class="feedback-msg"></div>
+            			</form>
+        			</div>
+    			</div>
 			</div>
 		</section>
 
+		<!-- Footer-->
 		<footer class="footer-area pt-100 pb-70">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3"><img src="assets/img/logo-dark.png" alt="Logo"></div>
-					<div class="col-lg-9 text-right"><p>COSMOSTRAK © Todos los derechos reservados.</p></div>
+					<div class="col-lg-3 col-md-6">
+						<div class="single-footer-widget">
+							<a href="index.html" class="logo">
+								<img src="assets/img/logo-dark.png" alt="CosmosTrak">
+							</a>
+
+							<p>CosmosTrak especialistas en soluciones de localización y monitoreo mediante tecnología de rastreo satelital. </p>
+
+							<ul class="social-icon">
+								<li>
+									<a href="https://www.facebook.com/" target="_blank">
+										<i class="bx bxl-facebook"></i>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.instagram.com/" target="_blank">
+										<i class="bx bxl-instagram"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6"></div>
+					<div class="col-lg-3 col-md-6"></div>
+
+					<div class="col-lg-3 col-md-6">
+						<div class="single-footer-widget">
+							<h3>Direccion y Contacto</h3>
+
+							<ul class="address">
+								<li class="location">
+									<i class="bx bxs-location-plus"></i>
+									Asuncion, Paraguay
+								</li>
+								<li>
+									<i class="bx bxs-envelope"></i>
+									<a href="mailto:info@ezio.com">info@cosmostrak.com.py</a>
+								</li>
+								<li>
+									<i class="bx bxs-phone-call"></i>
+									<a href="tel:+595991776777">(595) 991 776777</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</footer>
 
+		<!-- Copy -->
 		<div class="copy-right-area">
 			<div class="container">
-				<p>COSMOSTRAK © Todos los derechos reservados. Desarrollado por Marthin Meza</p>
+				<p>COSMOSTRAK © Todos los derechos reservados.</p>
 				<span id="app-version"></span>
 			</div>
 		</div>
+
+		<!-- BotonTop-->
+		<div class="go-top">
+			<i class="bx bx-chevrons-up"></i>
+			<i class="bx bx-chevrons-up"></i>
+		</div>
+
+		<!-- Botón flotante WhatsApp -->
+		<div id="whatsapp-btn" class="whatsapp-float">
+			<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 16 16">
+			<path d="M13.601 2.326A7.954 7.954 0 0 0 8.002 0C3.58 0 .002 3.58.002 8c0 1.411.371 2.79 1.077 4.002L0 16l4.127-1.063A7.948 7.948 0 0 0 8.002 16c4.421 0 8-3.58 8-8 0-2.137-.832-4.146-2.399-5.674zM8.002 14.5a6.466 6.466 0 0 1-3.313-.896l-.236-.14-2.447.63.65-2.386-.153-.244A6.47 6.47 0 0 1 1.502 8c0-3.59 2.91-6.5 6.5-6.5 1.736 0 3.369.676 4.598 1.905A6.466 6.466 0 0 1 14.502 8c0 3.59-2.91 6.5-6.5 6.5zm3.684-4.599c-.203-.101-1.201-.592-1.386-.66-.185-.069-.32-.102-.455.102-.134.203-.521.66-.638.796-.118.134-.236.152-.439.05-.203-.102-.858-.316-1.635-1.007-.604-.537-1.012-1.2-1.129-1.403-.118-.203-.012-.313.09-.414.092-.092.203-.236.305-.354.1-.118.134-.202.201-.337.067-.134.034-.25-.017-.354-.05-.102-.455-1.098-.623-1.507-.164-.394-.331-.34-.455-.346-.118-.007-.25-.007-.383-.007-.134 0-.354.05-.539.25s-.708.691-.708 1.68c0 .99.725 1.944.826 2.077.101.134 1.428 2.177 3.463 3.048.484.209.861.334 1.155.427.485.154.927.132 1.276.08.389-.058 1.201-.49 1.371-.963.168-.474.168-.88.118-.963-.05-.084-.185-.135-.388-.236z"/>
+			</svg>
+		</div>
+
+		<!-- Popup -->
+		<div id="wa-popup" class="wa-popup">
+			<div class="wa-popup-header">¿Necesitas ayuda?</div>
+			<div class="wa-popup-body">
+				Haz click aquí y uno de nuestros asesores te atenderá por WhatsApp.
+				<a href="https://api.whatsapp.com/send?phone=595991776777" target="_blank">Chatear Ahora</a>
+			</div>
+		</div>
+
+		<script>
+			const waBtn = document.getElementById("whatsapp-btn");
+			const waPopup = document.getElementById("wa-popup");
+
+			waBtn.addEventListener("click", () => {
+				waPopup.style.display = waPopup.style.display === "flex" ? "none" : "flex";
+			});
+		</script>
 
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -187,14 +271,24 @@
 		<!-- AOS and Initialization -->
 		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script>
-			AOS.init({ duration: 1000, once: true });
-			document.getElementById('btnSolicitar').addEventListener('click', function() {
-				const form = document.getElementById('formContainer');
-				form.classList.toggle('active');
-				if(form.classList.contains('active')) {
-					setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
-				}
-			});
+    		$(document).ready(function() {
+        		// 1. Enciende las animaciones
+        		AOS.init({ duration: 1000, once: true });
+        
+        		// 2. Controla el botón y el despliegue del formulario
+        		const btnSolicitar = document.getElementById('btnSolicitar');
+        		if(btnSolicitar) {
+            		btnSolicitar.addEventListener('click', function() {
+                		const form = document.getElementById('formContainer');
+                		form.classList.toggle('active');
+                		if(form.classList.contains('active')) {
+                    		setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+                		}
+            		});
+        		}
+    		});
 		</script>
+		<!-- Version Handler -->
+		<script src="assets/js/version-handler.js"></script>
 	</body>
 </html>
