@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
 
             const formData = {
-                servicio: form.querySelector('select') ? form.querySelector('select').value : '',
-                nombre: form.querySelector('[name="txtNombre"]') ? form.querySelector('[name="txtNombre"]').value : '',
-                apellido: form.querySelector('[name="txtApellido"]') ? form.querySelector('[name="txtApellido"]').value : '',
-                telefono: form.querySelector('[name="txtTelefono"]') ? form.querySelector('[name="txtTelefono"]').value : '',
-                mensaje: form.querySelector('[name="message"]') ? form.querySelector('[name="message"]').value : '',
-                tipo_formulario: form.querySelector('[name="tipo_formulario"]') ? form.querySelector('[name="tipo_formulario"]').value : 'cotizacion',
-                asunto: form.querySelector('[name="asunto"]') ? form.querySelector('[name="asunto"]').value : 'Solicitud de Cotización'
+                servicio: (form.querySelector('select[name="servicio"]') || form.querySelector('select[name="txtTipoVehiculo"]') || form.querySelector('select'))?.value || '',
+                nombre: form.querySelector('[name="txtNombre"]')?.value || '',
+                apellido: form.querySelector('[name="txtApellido"]')?.value || '',
+                telefono: form.querySelector('[name="txtTelefono"]')?.value || '',
+                mensaje: (form.querySelector('[name="message"]') || form.querySelector('#message'))?.value || '',
+                tipo_formulario: form.querySelector('[name="tipo_formulario"]')?.value || 'cotizacion',
+                asunto: form.querySelector('[name="asunto"]')?.value || 'Solicitud de Cotización'
             };
 
             submitFormData(formData, form);

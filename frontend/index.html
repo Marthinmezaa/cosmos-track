@@ -103,7 +103,7 @@
 										<a href="#nosotros" class="nav-link">Nosotros</a>
 									</li>
 									<li class="nav-item">
-										<a href="servicios.html" class="nav-link">Servicios</a>
+										<a href="javascript:void(0)" class="nav-link">Servicios</a>
 										<ul class="dropdown-menu">
 											<li class="nav-item">
 												<a href="particulares.html" class="nav-link">Particulares</a>
@@ -186,9 +186,11 @@
 									</div>
 									
 									<form class="courses-form">
+										<input type="hidden" name="tipo_formulario" value="cotizacion">
+										<input type="hidden" name="asunto" value="Solicitud desde Banner Principal">
 										<div class="form-group">
 											<label>Servicio para:</label>
-											<select>
+											<select name="servicio" id="servicio-banner">
 												<option value="AUTO">Auto</option>
 												<option value="MOTO">Moto</option>
 												<option value="FLOTA">Flota</option>
@@ -197,17 +199,17 @@
 
 										<div class="form-group">
 											<label>Nombre</label>
-											<input type="text" class="form-control" name="txtNombre" id="txtNombre">
+											<input type="text" class="form-control" name="txtNombre" id="txtNombre" required>
 										</div>
 
 										<div class="form-group">
 											<label>Apellido</label>
-											<input type="text" class="form-control" name="txtApellido" id="txtApellido">
+											<input type="text" class="form-control" name="txtApellido" id="txtApellido" required>
 										</div>
 
 										<div class="form-group">
 											<label>Telefono</label>
-											<input type="text" class="form-control" name="txtTelefono" id="txtTelefono">
+											<input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required>
 										</div>
 		
 										<button type="submit" class="default-btn">
@@ -301,11 +303,6 @@
 					</a>
 				</div>
 
-				<div class="text-center mt-5" data-aos="fade-up">
-					<a href="servicios.html" class="default-btn">
-						<span>Ver todos nuestros servicios</span>
-					</a>
-				</div>
 			</div>
 		</section>
 		
