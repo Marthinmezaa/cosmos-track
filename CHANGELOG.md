@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.5.0...v1.6.0) (2026-06-26)
+
+
+### Features
+
+* preparacion para Hostinger y eliminacion de servicios.html ([135a90c](https://github.com/Marthinmezaa/cosmos-track/commit/135a90c9f02b3cbc9311446b0af420ac3d108451))
+
 ## [1.5.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.4.0...v1.5.0) (2026-06-24)
 
 
