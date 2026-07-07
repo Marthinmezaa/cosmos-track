@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.3](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.2...v1.6.3) (2026-07-07)
+
+
+### Bug Fixes
+
+* **mailer:** cambiar a puerto 587 y usar STARTTLS para evasión de fir… ([adb1cc3](https://github.com/Marthinmezaa/cosmos-track/commit/adb1cc348c7e12fd0b61f988fbafa3ca0c7ccb39))
+* **mailer:** cambiar a puerto 587 y usar STARTTLS para evasión de firewall ([5c18e7d](https://github.com/Marthinmezaa/cosmos-track/commit/5c18e7dc56500d1bfd29569bf056d5e53edeb5fb))
+
 ## [1.6.2](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.1...v1.6.2) (2026-07-07)
 
 
