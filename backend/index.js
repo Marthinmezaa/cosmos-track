@@ -8,7 +8,12 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 const corsOptions = {
-    origin: ['https://www.cosmostrak.com.py', 'https://cosmostrak.com.py'],
+    origin: [
+        'https://www.cosmostrak.com.py', 
+        'https://cosmostrak.com.py',
+        'http://127.0.0.1:5500', // Autoriza Live Server de VS Code
+        'http://localhost:5500'  // Alternativa local
+    ],
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
