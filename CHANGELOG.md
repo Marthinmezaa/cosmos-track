@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.4](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.3...v1.6.4) (2026-07-07)
+
+
+### Bug Fixes
+
+* prevenir crash al resetear contenedores de formularios ([29ef80d](https://github.com/Marthinmezaa/cosmos-track/commit/29ef80d01f65c9e982972358c97f1c3c3b0b1ba2))
+* prevenir crash al resetear contenedores de formularios ([25a06d5](https://github.com/Marthinmezaa/cosmos-track/commit/25a06d5679083dce186807f0bb6abed570f97d24))
+
 ## [1.6.3](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.2...v1.6.3) (2026-07-07)
 
 
