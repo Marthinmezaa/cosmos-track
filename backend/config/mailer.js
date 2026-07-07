@@ -3,8 +3,8 @@ require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
   host: "smtp.hostinger.com", // Forzamos la dirección correcta aquí
-  port: 465,
-  secure: true, // true para puerto 465, false para otros puertos
+  port: 587,
+  secure: false, // true para puerto 465, false para otros puertos
   auth: {
     user: "info@cosmostrak.com.py", // Forzamos el usuario aquí
     pass: process.env.EMAIL_PASS, // Dejamos solo la contraseña oculta por seguridad
