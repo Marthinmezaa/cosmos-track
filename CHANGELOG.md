@@ -7,6 +7,8 @@
 
 * **mailer:** cambiar a puerto 587 y usar STARTTLS para evasión de fir… ([adb1cc3](https://github.com/Marthinmezaa/cosmos-track/commit/adb1cc348c7e12fd0b61f988fbafa3ca0c7ccb39))
 * **mailer:** cambiar a puerto 587 y usar STARTTLS para evasión de firewall ([5c18e7d](https://github.com/Marthinmezaa/cosmos-track/commit/5c18e7dc56500d1bfd29569bf056d5e53edeb5fb))
+* **mailer:** corregir estructura de transporte para forzar IPv4 ([7c32849](https://github.com/Marthinmezaa/cosmos-track/commit/7c32849baf595aa24b3981b9e97c5a59ac5c7304))
+* **mailer:** corregir estructura de transporte para forzar IPv4 ([089aa65](https://github.com/Marthinmezaa/cosmos-track/commit/089aa65c2808b5da337d043f2be4e96dd3632d76))
 
 ## [1.6.2](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.1...v1.6.2) (2026-07-07)
 
