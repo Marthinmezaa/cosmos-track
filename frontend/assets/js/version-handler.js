@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const versionElement = document.getElementById('app-version');
     if (!versionElement) return;
 
-    fetch('/api/version')
+    fetch('https://cosmostrak-backend.onrender.com/api/version')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener la versión');

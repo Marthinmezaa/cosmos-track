@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.disabled = true;
         btn.innerHTML = '<span>Enviando...</span>';
 
-        fetch('/api/form/submit', {
+        fetch('https://cosmostrak-backend.onrender.com/api/form/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
