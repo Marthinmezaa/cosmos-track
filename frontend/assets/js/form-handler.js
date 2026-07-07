@@ -74,8 +74,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formSuccess(form) {
-        form.reset();
+        // Verificamos si el elemento que pasamos tiene la función reset nativa (es decir, es un <form>)
+        if (typeof form.reset === 'function') {
+            form.reset();
+        } 
+        // Si no es un formulario (ej: es un <div>), buscamos el <form> real que está adentro
+        else {
+            const formularioReal = form.querySelector('form');
+            if (formularioReal && typeof formularioReal.reset === 'function') {
+                formularioReal.reset();
+            } else {
+                console.warn('Se envió con éxito, pero no se encontró la etiqueta <form> para limpiar los campos.');
+            }
+        }
     }
+
 
     function showFeedback(success, message, formElement) {
         let feedbackElement;
