@@ -1,30 +1,40 @@
-const mysql = require('mysql2/promise');
+const { Pool } = require('pg');
 require('dotenv').config();
 
-const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-});
+const poolConfig = process.env.DATABASE_URL
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    }
+    : {
+        host: process.env.PGHOST || process.env.DB_HOST,
+        user: process.env.PGUSER || process.env.DB_USER,
+        password: process.env.PGPASSWORD || process.env.DB_PASSWORD,
+        database: process.env.PGDATABASE || process.env.DB_NAME,
+        port: process.env.PGPORT || 5432,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    };
 
-// Prueba de conexión diferida
-pool.getConnection()
-    .then(connection => {
-        console.log('Conectado a la base de datos MySQL en Hostinger');
-        connection.release();
+const pool = new Pool(poolConfig);
+
+// Prueba de conexión
+pool.connect()
+    .then(client => {
+        console.log('Conectado a la base de datos PostgreSQL (Neon)');
+        client.release();
     })
     .catch(err => {
-        console.error('Error conectando a la base de datos:', err.message);
+        console.error('Error conectando a la base de datos PostgreSQL:', err.message);
     });
 
 module.exports = {
-    query: async (sql, params) => {
-        const [results] = await pool.execute(sql, params);
-        return results;
+    query: async (text, params) => {
+        const res = await pool.query(text, params);
+        return res.rows;
     },
     pool
 };

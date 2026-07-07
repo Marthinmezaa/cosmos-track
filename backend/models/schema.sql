@@ -1,5 +1,6 @@
+-- Esquema para PostgreSQL (Neon)
 CREATE TABLE IF NOT EXISTS contactos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100),
     email VARCHAR(100),
@@ -9,7 +10,7 @@ CREATE TABLE IF NOT EXISTS contactos (
     servicio VARCHAR(50), -- Para el formulario de cotización
     tipo_formulario VARCHAR(20) NOT NULL, -- 'contacto' o 'cotizacion'
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
 -- NOTA: Si la tabla ya existe sin la columna 'apellido', ejecute el siguiente comando:
--- ALTER TABLE contactos ADD COLUMN apellido VARCHAR(100) AFTER nombre;
+-- ALTER TABLE contactos ADD COLUMN apellido VARCHAR(100);
