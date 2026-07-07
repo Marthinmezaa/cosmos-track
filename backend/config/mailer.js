@@ -9,6 +9,9 @@ const transporter = nodemailer.createTransport({
     user: "info@cosmostrak.com.py", // Forzamos el usuario aquí
     pass: process.env.EMAIL_PASS, // Dejamos solo la contraseña oculta por seguridad
   },
+  tls: {
+    rejectUnauthorized: false, // (Opcional, pero recomendado si hay problemas de certificados)
+  },
   family: 4,
 });
 
