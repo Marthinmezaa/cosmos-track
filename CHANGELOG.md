@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.1](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.0...v1.6.1) (2026-07-07)
+
+
+### Bug Fixes
+
+* **cors:** autorizar entorno local en la configuración de seguridad ([f2b9584](https://github.com/Marthinmezaa/cosmos-track/commit/f2b95843fdd44e0a8c436aaffe50f42cf53876c9))
+* **cors:** autorizar entorno local en la configuración de seguridad ([4ef1c4d](https://github.com/Marthinmezaa/cosmos-track/commit/4ef1c4dc63b52f757cfb2c02effc5abc897ba550))
+* update frontend API endpoints to production Render URL ([49a7c6e](https://github.com/Marthinmezaa/cosmos-track/commit/49a7c6e95af16ac5ca6be8fe04b7505cfb29f772))
+
 ## [1.6.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.5.0...v1.6.0) (2026-06-26)
 
 
