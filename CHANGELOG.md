@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.2](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.1...v1.6.2) (2026-07-07)
+
+
+### Bug Fixes
+
+* **config:** forzar host de Hostinger directamente en la configuración ([11be60b](https://github.com/Marthinmezaa/cosmos-track/commit/11be60b9512bc6d3e82a1970793279b7b104f11e))
+* **config:** forzar host de Hostinger directamente en la configuración ([6ba6549](https://github.com/Marthinmezaa/cosmos-track/commit/6ba654983fd5120e466bbd95228cc3889c0a46a2))
+* **mailer:** forzar resolución IPv4 para evitar error ENETUNREACH ([656e519](https://github.com/Marthinmezaa/cosmos-track/commit/656e51911d94857739c8e965e521f9038b9029d8))
+* **mailer:** forzar resolución IPv4 para evitar error ENETUNREACH ([4add9b8](https://github.com/Marthinmezaa/cosmos-track/commit/4add9b825026ff254df2d23683420b0b5490ece4))
+
 ## [1.6.1](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.0...v1.6.1) (2026-07-07)
 
 
