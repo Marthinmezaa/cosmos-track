@@ -10,10 +10,10 @@ if (process.env.DB_SSL === "true") {
 }
 
 const poolConfig = {
-  host: '127.0.0.1',
-  user: 'u310821374_admin',
-  password: 'Vc4GAbx9',
-  database: 'u310821374_cosmos',
+  host: process.env.DB_HOST || '127.0.0.1',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'cosmostrak',
   port: parseInt(process.env.DB_PORT || "3306", 10),
   waitForConnections: true,
   connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || "10", 10),
