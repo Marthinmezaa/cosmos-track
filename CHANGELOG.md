@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.6](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.5...v1.6.6) (2026-07-13)
+
+
+### Bug Fixes
+
+* **db:** restaurar lectura de env y usar hostname absoluto de Hostinger ([74eecc8](https://github.com/Marthinmezaa/cosmos-track/commit/74eecc86536902ca7e976a83360eab23a44ea363))
+* **db:** restaurar lectura de env y usar hostname absoluto de Hostinger ([b9fc1fe](https://github.com/Marthinmezaa/cosmos-track/commit/b9fc1feae90435c5d88d7ae4125f46c21b0a7fcc))
+
 ## [1.6.5](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.4...v1.6.5) (2026-07-13)
 
 
