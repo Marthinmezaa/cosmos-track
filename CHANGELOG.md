@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.7](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.6...v1.6.7) (2026-07-13)
+
+
+### Bug Fixes
+
+* **model:** sanear parámetros de entrada para prevenir TypeError en M… ([ca35c05](https://github.com/Marthinmezaa/cosmos-track/commit/ca35c05d375ee98a4a716cdae3918ee9de7531bd))
+* **model:** sanear parámetros de entrada para prevenir TypeError en MySQL ([c22e3ad](https://github.com/Marthinmezaa/cosmos-track/commit/c22e3adac77437780f74171989015306eb054691))
+
 ## [1.6.6](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.5...v1.6.6) (2026-07-13)
 
 
