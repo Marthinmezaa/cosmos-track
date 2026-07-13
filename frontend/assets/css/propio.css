@@ -197,3 +197,84 @@
         background-color: #1a1a1a !important;
         color: #ffffff !important;
     }
+
+    /* ==========================================================================
+       Premium Glassmorphism Alert Boxes for Form Feedback
+       ========================================================================== */
+
+    /* Contenedor principal de mensajes de envío de formulario */
+    #msgSubmit,
+    .feedback-msg {
+        display: none; /* Se mostrará dinámicamente cuando tenga texto */
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Habilitar display block cuando el handler remueva la clase hidden de forma implícita o haya texto */
+    #msgSubmit:not(.hidden),
+    .feedback-msg:not(.hidden) {
+        display: block;
+        animation: slideInFade 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    /* Ajustar estilos específicos de éxito (Modo Claro) */
+    #msgSubmit.text-success,
+    .feedback-msg.text-success {
+        background: rgba(40, 167, 69, 0.08); /* Verde ultra suave */
+        color: #1e7e34 !important; /* Verde oscuro para excelente legibilidad */
+        border: 1px solid rgba(40, 167, 69, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(40, 167, 69, 0.08);
+    }
+
+    /* Ajustar estilos específicos de error (Modo Claro) */
+    #msgSubmit.text-danger,
+    .feedback-msg.text-danger {
+        background: rgba(220, 53, 69, 0.08); /* Rojo ultra suave */
+        color: #bd2130 !important; /* Rojo oscuro para excelente contraste */
+        border: 1px solid rgba(220, 53, 69, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(220, 53, 69, 0.08);
+    }
+
+    /* Adaptación Premium para Modo Oscuro (Theme Dark) */
+    .theme-dark #msgSubmit.text-success,
+    .theme-dark .feedback-msg.text-success,
+    [data-theme='dark'] #msgSubmit.text-success,
+    [data-theme='dark'] .feedback-msg.text-success {
+        background: rgba(40, 167, 69, 0.15); /* Fondo un poco más visible en oscuro */
+        color: #2cd455 !important; /* Verde brillante de alta visibilidad */
+        border: 1px solid rgba(40, 167, 69, 0.4);
+        box-shadow: 0 8px 32px 0 rgba(0, 255, 100, 0.1);
+    }
+
+    .theme-dark #msgSubmit.text-danger,
+    .theme-dark .feedback-msg.text-danger,
+    [data-theme='dark'] #msgSubmit.text-danger,
+    [data-theme='dark'] .feedback-msg.text-danger {
+        background: rgba(220, 53, 69, 0.15);
+        color: #ff6b7a !important; /* Rojo pastel brillante para excelente legibilidad */
+        border: 1px solid rgba(220, 53, 69, 0.4);
+        box-shadow: 0 8px 32px 0 rgba(255, 50, 50, 0.1);
+    }
+
+    /* Animación fluida de entrada */
+    @keyframes slideInFade {
+        from {
+            opacity: 0;
+            transform: translateY(15px) scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
