@@ -9,7 +9,7 @@ const Contacto = {
             INSERT INTO contactos (nombre, apellido, email, telefono, asunto, mensaje, servicio, tipo_formulario)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?);
         `;
-        const values = [nombre, apellido || null, email, telefono, asunto, mensaje, servicio, tipo_formulario];
+        const values = [nombre || null, apellido || null, email || null, telefono || null, asunto || null, mensaje || null, servicio || null, tipo_formulario || null];
 
         // El método db.query devuelve las filas afectadas u objeto de inserción en MySQL.
         // Hacemos la consulta para insertar los datos.
@@ -21,14 +21,14 @@ const Contacto = {
         // con los datos enviados y el ID generado de forma limpia.
         return {
             id: result.insertId || null,
-            nombre,
+            nombre: nombre || null,
             apellido: apellido || null,
-            email,
-            telefono,
-            asunto,
-            mensaje,
-            servicio,
-            tipo_formulario
+            email: email || null,
+            telefono: telefono || null,
+            asunto: asunto || null,
+            mensaje: mensaje || null,
+            servicio: servicio || null,
+            tipo_formulario: tipo_formulario || null
         };
     }
 };
