@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.5](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.4...v1.6.5) (2026-07-13)
+
+
+### Bug Fixes
+
+* **db:** forzar conexión MySQL por IPv4 en lugar de localhost ([5ba1cd8](https://github.com/Marthinmezaa/cosmos-track/commit/5ba1cd8d86448fe26aed3be2ac1cdfe99bf171aa))
+* **db:** forzar conexión MySQL por IPv4 en lugar de localhost ([85d838b](https://github.com/Marthinmezaa/cosmos-track/commit/85d838b6a6cebb6bb86e295b9763012203a0fb5e))
+
 ## [1.6.4](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.3...v1.6.4) (2026-07-07)
 
 
