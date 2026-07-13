@@ -10,7 +10,7 @@ if (process.env.DB_SSL === "true") {
 }
 
 const poolConfig = {
-  host: "127.0.0.1",
+  host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_NAME || "cosmostrak",
