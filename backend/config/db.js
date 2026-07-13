@@ -12,7 +12,7 @@ if (process.env.DB_SSL === "true") {
 const poolConfig = {
   host: '127.0.0.1',
   user: 'u310821374_admin',
-  password: '.\p8Q/LReHT',
+  password: 'Vc4GAbx9',
   database: 'u310821374_cosmos',
   port: parseInt(process.env.DB_PORT || "3306", 10),
   waitForConnections: true,
