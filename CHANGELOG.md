@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.9.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.8.0...v1.9.0) (2026-07-20)
+
+
+### Features
+
+* agregar configuracion inicial para Claude Code ([d9726df](https://github.com/Marthinmezaa/cosmos-track/commit/d9726df6525674db4b3bfa4a2d6195f3bcdb6651))
+* agregar configuracion inicial para Claude Code ([2829495](https://github.com/Marthinmezaa/cosmos-track/commit/28294951d26fb7432d9652557379df180bf79749))
+
+
+### Bug Fixes
+
+* **forms:** simplificar validación telefónica y corregir contraste de alertas en banner ([3498f8a](https://github.com/Marthinmezaa/cosmos-track/commit/3498f8a503572f57978c5d7a41160163c3a9c52f))
+* **forms:** simplificar validación telefónica y corregir contraste de… ([494a54f](https://github.com/Marthinmezaa/cosmos-track/commit/494a54ff1ec42fe5c680c8f43cc556707f59c8f7))
+
 ## [1.8.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.7.0...v1.8.0) (2026-07-20)
 
 
