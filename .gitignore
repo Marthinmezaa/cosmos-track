@@ -22,3 +22,6 @@ yarn-error.log*
 # Carpetas de construcción/empaquetado
 dist/
 build/
+
+# Archivos de configuración de Claude AI
+.claude/projects/
