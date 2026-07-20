@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.7.0...v1.8.0) (2026-07-20)
+
+
+### Features
+
+* **forms:** agregar validación estricta de teléfono, placeholders y … ([120c5e5](https://github.com/Marthinmezaa/cosmos-track/commit/120c5e5a3d1a6dcfcc0f81248755df01f88fd6d4))
+* **forms:** agregar validación estricta de teléfono, placeholders y separar apellido ([7b3606a](https://github.com/Marthinmezaa/cosmos-track/commit/7b3606a1d745873860c6d023bda9f34e87707252))
+
 ## [1.7.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.7...v1.7.0) (2026-07-20)
 
 
