@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.7...v1.7.0) (2026-07-20)
+
+
+### Features
+
+* **ui:** actualizar encabezado principal y llamado a la acción en el HTML ([f5ea1c8](https://github.com/Marthinmezaa/cosmos-track/commit/f5ea1c8fd787032f0cefb7d93a0b8499e8f77142))
+* **ui:** actualizar encabezado principal y llamado a la acción en el… ([b505a1d](https://github.com/Marthinmezaa/cosmos-track/commit/b505a1dbd268d48d529772be12586ce6891f3aa3))
+
 ## [1.6.7](https://github.com/Marthinmezaa/cosmos-track/compare/v1.6.6...v1.6.7) (2026-07-13)
 
 
