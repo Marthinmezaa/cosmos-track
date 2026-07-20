@@ -199,17 +199,17 @@
 
 										<div class="form-group">
 											<label>Nombre</label>
-											<input type="text" class="form-control" name="txtNombre" id="txtNombre" required>
+											<input type="text" class="form-control" name="txtNombre" id="txtNombre" placeholder="Ej: Juan" required>
 										</div>
 
 										<div class="form-group">
 											<label>Apellido</label>
-											<input type="text" class="form-control" name="txtApellido" id="txtApellido" required>
+											<input type="text" class="form-control" name="txtApellido" id="txtApellido" placeholder="Ej: Pérez" required>
 										</div>
 
 										<div class="form-group">
 											<label>Telefono</label>
-											<input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required>
+											<input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="(0986) 456-000" pattern="\(0\d{3}\) \d{3}-\d{3}" maxlength="14" title="Formato requerido: (0986) 456-000" required>
 										</div>
 		
 										<button type="submit" class="default-btn">
@@ -360,27 +360,39 @@
 					<div class="row">
 						<div class="col-lg-6 col-sm-6">
 							<div class="form-group">
-								<input type="text" name="name" id="name" class="form-control" required data-error="Ingresa tu nombre completo" placeholder="Nombre Completo">
+								<label for="name">Nombre</label>
+								<input type="text" name="name" id="name" class="form-control" required data-error="Ingresa tu nombre" placeholder="Ej: Juan">
 								<div class="help-block with-errors"></div>
 							</div>
 						</div>
 
 						<div class="col-lg-6 col-sm-6">
 							<div class="form-group">
-								<input type="email" name="email" id="email" class="form-control" required data-error="Ingresa tu correo" placeholder="Correo">
+								<label for="apellido">Apellido</label>
+								<input type="text" name="apellido" id="apellido" class="form-control" required data-error="Ingresa tu apellido" placeholder="Ej: Pérez">
 								<div class="help-block with-errors"></div>
 							</div>
 						</div>
 
 						<div class="col-lg-6 col-sm-6">
 							<div class="form-group">
-								<input type="text" name="phone_number" id="phone_number" required data-error="Ingresa tu telefono" class="form-control" placeholder="Telefono">
+								<label for="email">Correo</label>
+								<input type="email" name="email" id="email" class="form-control" required data-error="Ingresa tu correo" placeholder="ejemplo@correo.com">
 								<div class="help-block with-errors"></div>
 							</div>
 						</div>
 
 						<div class="col-lg-6 col-sm-6">
 							<div class="form-group">
+								<label for="phone_number">Teléfono</label>
+								<input type="text" name="phone_number" id="phone_number" required data-error="Ingresa tu telefono" class="form-control" placeholder="(0986) 456-000" pattern="\(0\d{3}\) \d{3}-\d{3}" maxlength="14" title="Formato requerido: (0986) 456-000">
+								<div class="help-block with-errors"></div>
+							</div>
+						</div>
+
+						<div class="col-lg-6 col-sm-6">
+							<div class="form-group">
+								<label for="msg_subject">Asunto</label>
 								<input type="text" name="msg_subject" id="msg_subject" class="form-control" required data-error="Ingresa el asunto" placeholder="Asunto">
 								<div class="help-block with-errors"></div>
 							</div>
@@ -388,6 +400,7 @@
 
 						<div class="col-lg-12 col-md-12">
 							<div class="form-group">
+								<label for="message">Mensaje</label>
 								<textarea name="message" class="form-control" id="message" cols="30" rows="10" required data-error="Escribe un mensaje" placeholder="Mensaje"></textarea>
 								<div class="help-block with-errors"></div>
 							</div>

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Recoger datos
             const formData = {
                 nombre: document.getElementById('name').value,
+                apellido: document.getElementById('apellido') ? document.getElementById('apellido').value : '',
                 email: document.getElementById('email') ? document.getElementById('email').value : '',
                 telefono: document.getElementById('phone_number').value,
                 asunto: document.getElementById('msg_subject') ? document.getElementById('msg_subject').value : 'Contacto desde Web',

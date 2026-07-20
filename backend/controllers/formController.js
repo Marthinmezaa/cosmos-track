@@ -2,9 +2,19 @@ const Contacto = require('../models/contacto');
 const { sendContactEmail } = require('../config/mailer');
 const { sendWhatsAppNotification } = require('../config/whatsapp');
 
+const TELEFONO_REGEX = /^\(0\d{3}\) \d{3}-\d{3}$/;
+
 const submitForm = async (req, res) => {
     try {
         const formData = req.body;
+
+        // Validar formato estricto de teléfono antes de guardar o notificar nada
+        if (!TELEFONO_REGEX.test(formData.telefono || '')) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'El teléfono debe tener el formato (0986) 456-000'
+            });
+        }
 
         // 1. Guardar en Base de Datos (MySQL)
         const savedContact = await Contacto.create(formData);
