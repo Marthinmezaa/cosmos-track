@@ -2,7 +2,7 @@ const Contacto = require('../models/contacto');
 const { sendContactEmail } = require('../config/mailer');
 const { sendWhatsAppNotification } = require('../config/whatsapp');
 
-const TELEFONO_REGEX = /^\(0\d{3}\) \d{3}-\d{3}$/;
+const TELEFONO_REGEX = /^0\d{9}$/;
 
 const submitForm = async (req, res) => {
     try {
@@ -12,7 +12,7 @@ const submitForm = async (req, res) => {
         if (!TELEFONO_REGEX.test(formData.telefono || '')) {
             return res.status(400).json({
                 status: 'error',
-                message: 'El teléfono debe tener el formato (0986) 456-000'
+                message: 'El teléfono debe tener 10 dígitos y empezar en 0, ej: 0987123456'
             });
         }
 

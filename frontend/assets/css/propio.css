@@ -267,6 +267,23 @@
         box-shadow: 0 8px 32px 0 rgba(255, 50, 50, 0.1);
     }
 
+    /* El formulario "Cotizar Ahora" del banner vive sobre fondo azul sólido
+       (.quote-price-content), donde el verde/rojo translúcido de arriba
+       queda ilegible. Usamos una píldora blanca sólida para buen contraste. */
+    .quote-price-content .feedback-msg.text-success {
+        background: #ffffff;
+        color: #1e7e34 !important;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .quote-price-content .feedback-msg.text-danger {
+        background: #ffffff;
+        color: #bd2130 !important;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.2);
+    }
+
     /* Animación fluida de entrada */
     @keyframes slideInFade {
         from {
