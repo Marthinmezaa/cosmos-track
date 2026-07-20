@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
 const sendContactEmail = async (contactData) => {
   const {
     nombre,
+    apellido,
     email,
     telefono,
     asunto,
@@ -35,6 +36,7 @@ const sendContactEmail = async (contactData) => {
         <h2>Nueva notificación desde CosmosTrak Web</h2>
         <p><strong>Tipo:</strong> ${tipo_formulario.toUpperCase()}</p>
         <p><strong>Nombre:</strong> ${nombre}</p>
+        ${apellido ? `<p><strong>Apellido:</strong> ${apellido}</p>` : ""}
         <p><strong>Teléfono:</strong> ${telefono}</p>
         ${email ? `<p><strong>Email:</strong> ${email}</p>` : ""}
         ${servicio ? `<p><strong>Servicio solicitado:</strong> ${servicio}</p>` : ""}
