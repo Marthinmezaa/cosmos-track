@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.9.0...v1.10.0) (2026-07-27)
+
+
+### Features
+
+* agregar Meta Pixel a las paginas del sitio ([425740e](https://github.com/Marthinmezaa/cosmos-track/commit/425740e7ffafa65351f253e4975e03d1e6f2907d))
+* agregar Meta Pixel a las paginas del sitio ([4b83a0e](https://github.com/Marthinmezaa/cosmos-track/commit/4b83a0e4140ff78d6dc26228d051ba133830748d))
+
 ## [1.9.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.8.0...v1.9.0) (2026-07-20)
 
 
