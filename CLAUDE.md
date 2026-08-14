@@ -43,7 +43,7 @@ npm run dev       # node --watch index.js (auto-reinicio)
 4. Siempre manda un email de notificación (si falla, se loguea pero no hace fallar el request — el contacto ya quedó guardado).
 5. Manda notificación por WhatsApp vía CallMeBot **solo cuando `tipo_formulario === 'cotizacion'`** (pedidos de cotización, no mensajes de contacto general) — tampoco bloquea el request si falla.
 
-**Versionado**: `release-please` (GitHub Action, Conventional Commits) trackea la versión de release solo vía tags de git y `CHANGELOG.md` — no hay `release-please-config.json`/manifest, así que **no** toca `backend/package.json`. `GET /api/version` lee la versión de `backend/package.json`, y `frontend/assets/js/version-handler.js` la renderiza en el footer (`#app-version`). Como nada sincroniza a los dos, `backend/package.json` se va desfasando de la versión realmente publicada con el tiempo — bumpealo a mano en cada release, o conectá `release-please` con un manifest para que lo haga solo, hasta que se resuelva de raíz (ver `BITACORA.md`).
+**Versionado**: `release-please` corre en modo manifest (`release-please-config.json` + `.release-please-manifest.json`, ambos en la raíz). El paquete es la raíz del repo (`"."`, `release-type: simple`, tags planos `vX.Y.Z`, `CHANGELOG.md` en la raíz — igual que siempre) y usa `extra-files` con jsonpath para bumpear además `backend/package.json` y `backend/package-lock.json` en cada release. `GET /api/version` lee esa versión y `frontend/assets/js/version-handler.js` la renderiza en el footer (`#app-version`) — ahora se mantiene sincronizada sola, no hace falta bumpear a mano.
 
 ## CI
 
