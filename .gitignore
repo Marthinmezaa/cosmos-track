@@ -25,3 +25,5 @@ build/
 
 # Archivos de configuración de Claude AI
 .claude/projects/
+# Cache local de herramientas
+.atl/
