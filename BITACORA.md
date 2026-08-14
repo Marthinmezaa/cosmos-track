@@ -36,6 +36,15 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 - **2026-08-14** — Con el trigger ampliado (PR #77), el primer deploy tiró un error FTP transitorio (`550 Rename of hidden file... failed`) al subir los 78 archivos — reintentado a mano, pasó limpio la segunda vez. Nota importante para el futuro: como `public_html` (con el archivo de estado de `FTP-Deploy-Action` adentro) se vacía en cada push, **todo deploy de ahora en más va a ser una resubida completa** (78 archivos, ~54 MB), no un sync incremental — más lento y con más chance de toparse con hipos como este. Sin reintento automático todavía; por ahora se resuelve re-disparando el workflow a mano si falla.
 
+- **2026-08-14 — Causa raíz de fondo, sin arreglo directo disponible.** El sitio se rompió una tercera vez **sin ningún push nuevo** entre dos chequeos (16:03 con deploy exitoso → 16:13 caído). Se revisaron los **Registros de runtime** del Node.js App en hPanel y aparece el error real: `Error: ENOENT ... '/home/u310821374/domains/cosmostrak.com.py/hbuilds/versions/<id>/frontend/index.html'`. Esto confirma la arquitectura completa:
+  - El Node.js App real corre desde una carpeta versionada propia (`hbuilds/versions/<id>/`), no desde `nodejs/` ni desde `public_html` (esas son otras carpetas que vimos, ninguna es la que ejecuta el proceso).
+  - Esa carpeta versionada **nunca tuvo `frontend/`** — porque el "Directorio root" del Node App está fijado en `backend/` desde que se configuró, y express.static(`../frontend`) apunta a una ruta que jamás existió ahí.
+  - Hostinger sirve el dominio en dos capas: el edge revisa `public_html` primero (por eso el sitio "funciona" cuando lo subimos ahí); si no encuentra el archivo, cae al Node App como respaldo, que también falla (de ahí el 404 con `X-Powered-By: Express`).
+  - `public_html` se vacía **por su cuenta, en un horario propio de Hostinger** — no correlaciona con pushes a `main` ni con nada que controlemos desde GitHub.
+  - Se intentó cambiar "Directorio root" en hPanel → Panel: **no hay control editable en la UI**, parece fijarse solo al conectar el repo por primera vez. Recrear el Node.js App desde cero para cambiarlo es riesgoso (se perderían variables de entorno, conexión a DB, dominio, SSL, CDN ya configurados) — no se hizo hoy.
+  - **Mitigación aplicada**: se agregó un trigger `schedule` a `deploy-frontend.yml` (cada 15 min) además del trigger por push, como red de seguridad — no arregla la causa de fondo, pero acota la ventana de sitio caído a como máximo ~15 minutos sin intervención manual.
+
 ## Pendientes / próximos pasos
 
-- [ ] Evaluar agregar reintento automático a `deploy-frontend.yml` (ver nota arriba) si los hipos de FTP se repiten seguido.
+- [ ] Evaluar agregar reintento automático a `deploy-frontend.yml` si los hipos de FTP se repiten seguido.
+- [ ] Arreglo de fondo pendiente: contactar soporte de Hostinger para pedir que cambien el "Directorio root" del Node.js App de `backend` a la raíz del repo (o preguntar si existe otra forma de lograrlo sin recrear la app) — eso eliminaría la necesidad de `public_html`/`deploy-frontend.yml` por completo, volviendo a la arquitectura original que el código ya asume (`index.js` sirviendo `../frontend` directo).

@@ -1,14 +1,18 @@
 name: Deploy Frontend a Hostinger
 
-# Corre en TODO push a main, no solo cuando cambia frontend/ -- confirmado
-# el 14/08 que el redeploy del Node.js App (que se dispara con cualquier
-# push a main, toque o no backend/) vacia public_html como efecto
-# colateral de su propio ciclo de build, aunque su "Directorio root" este
-# configurado en backend/ y nunca toque frontend/. Sin este trigger amplio,
-# cualquier merge no relacionado con el frontend rompe el sitio en vivo.
+# Corre en TODO push a main (no solo cambios de frontend/) y ademas cada
+# 15 min por horario. Confirmado el 14/08 con los Registros de runtime de
+# Hostinger que public_html se vacia por su cuenta, sin relacion con ningun
+# push -- el Node.js App real corre desde una carpeta versionada propia
+# (hbuilds/versions/<id>/) que nunca tuvo frontend/ (su "Directorio root"
+# esta fijado en backend/ y no hay forma de cambiarlo sin recrear la app).
+# public_html es la capa que Hostinger sirve primero y la que mantenemos
+# sincronizada; el cron es la red de seguridad para cuando se resetea sola.
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "*/15 * * * *"
   workflow_dispatch: # permite correrlo a mano desde Actions, para probar credenciales
 
 jobs:
