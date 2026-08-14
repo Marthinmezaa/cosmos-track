@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - "frontend/**"
+  workflow_dispatch: # permite correrlo a mano desde Actions, para probar credenciales
 
 jobs:
   deploy:
