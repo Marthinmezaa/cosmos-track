@@ -49,14 +49,13 @@ npm run dev       # node --watch index.js (auto-reinicio)
 
 - `.github/workflows/devsecops.yml` — en push/PR a `main`: escaneo de secretos con Gitleaks, luego `npm audit --audit-level=high` en `backend/`.
 - `.github/workflows/release-please.yml` — automatiza bumps de versión/releases a partir de Conventional Commits en `main`.
-- `.github/workflows/deploy-frontend.yml` — en push a `main` que toque `frontend/**`, sube esa carpeta por FTPS al `public_html` de Hostinger (`SamKirkland/FTP-Deploy-Action`). Requiere los secrets `HOSTINGER_FTP_SERVER`, `HOSTINGER_FTP_USERNAME`, `HOSTINGER_FTP_PASSWORD`, `HOSTINGER_FTP_SERVER_DIR`.
-
 ## Hosting
 
-Todo corre en **Hostinger**, pero en dos despliegues separados — importante no asumir que es uno solo:
-- **Backend**: Node.js App de Hostinger con auto-deploy por Git, clona el repo completo y arranca `backend/index.js` solo. Se actualiza automáticamente en cada push a `main`.
-- **Frontend**: se sirve como sitio estático desde `public_html` (por eso el dominio público necesita CORS explícito en `config/db.js`/`index.js` para hablarle a la API — no comparten origen). Antes se subía a mano por hPanel en cada cambio; ahora lo hace `deploy-frontend.yml` automáticamente.
-- Base de datos MySQL y el relay SMTP (`smtp.hostinger.com`, hardcodeado en `config/mailer.js`) también viven ahí.
+Todo corre en **Hostinger**, en un solo despliegue: un Node.js App con auto-deploy por Git que clona el repo completo (incluido `frontend/`) y arranca `backend/index.js`, que sirve el frontend como estático (ver Arquitectura arriba) — **no** hay un hosting estático separado para el frontend, es la misma app Express. La whitelist de CORS con varios orígenes en `index.js` es resabio de una migración vieja a Render, no evidencia de un segundo despliegue — no te dejes engañar por eso (ya nos pasó una vez, ver `BITACORA.md`, incidente del 14/08).
+
+Base de datos MySQL y el relay SMTP (`smtp.hostinger.com`, hardcodeado en `config/mailer.js`) también viven ahí.
+
+**No agregar un deploy paralelo por FTP/SFTP a este mismo árbol de archivos** — ya se probó y corrompió el despliegue de Git del Node App (ver incidente en `BITACORA.md`). Si hace falta automatizar algo del deploy, primero confirmar en hPanel cómo está armado el Node.js App actual, no asumir.
 
 ## Filosofía de desarrollo
 
