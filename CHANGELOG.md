@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.1](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.0...v1.10.1) (2026-08-14)
+
+
+### Bug Fixes
+
+* sincronizar version de package.json con el release publicado ([4953f7b](https://github.com/Marthinmezaa/cosmos-track/commit/4953f7b3e15844b3e2a8d5a40b8cbb59e6084405))
+* sincronizar version de package.json con el release publicado ([3ee3cb1](https://github.com/Marthinmezaa/cosmos-track/commit/3ee3cb1051a6b3e16d634d155d6903b398573d79))
+
 ## [1.10.0](https://github.com/Marthinmezaa/cosmos-track/compare/v1.9.0...v1.10.0) (2026-07-27)
 
 
