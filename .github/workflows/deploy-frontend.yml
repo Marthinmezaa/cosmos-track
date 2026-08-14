@@ -1,0 +1,27 @@
+name: Deploy Frontend a Hostinger
+
+# Solo corre cuando algo dentro de frontend/ cambia en main, para no
+# disparar una subida FTP innecesaria en cada release o cambio de backend.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+
+jobs:
+  deploy:
+    name: Subir frontend por FTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener el código fuente
+        uses: actions/checkout@v4
+
+      - name: Deploy vía FTPS a Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./frontend/
+          server-dir: ${{ secrets.HOSTINGER_FTP_SERVER_DIR }}

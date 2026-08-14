@@ -49,10 +49,14 @@ npm run dev       # node --watch index.js (auto-reinicio)
 
 - `.github/workflows/devsecops.yml` — en push/PR a `main`: escaneo de secretos con Gitleaks, luego `npm audit --audit-level=high` en `backend/`.
 - `.github/workflows/release-please.yml` — automatiza bumps de versión/releases a partir de Conventional Commits en `main`.
+- `.github/workflows/deploy-frontend.yml` — en push a `main` que toque `frontend/**`, sube esa carpeta por FTPS al `public_html` de Hostinger (`SamKirkland/FTP-Deploy-Action`). Requiere los secrets `HOSTINGER_FTP_SERVER`, `HOSTINGER_FTP_USERNAME`, `HOSTINGER_FTP_PASSWORD`, `HOSTINGER_FTP_SERVER_DIR`.
 
 ## Hosting
 
-Todo corre en **Hostinger**: la base de datos MySQL, el relay SMTP (`smtp.hostinger.com`, hardcodeado en `config/mailer.js`) y el backend Node. No hay CDN, pipeline de build ni workflow de deploy en este repo — el deploy es manual contra el entorno de Hostinger.
+Todo corre en **Hostinger**, pero en dos despliegues separados — importante no asumir que es uno solo:
+- **Backend**: Node.js App de Hostinger con auto-deploy por Git, clona el repo completo y arranca `backend/index.js` solo. Se actualiza automáticamente en cada push a `main`.
+- **Frontend**: se sirve como sitio estático desde `public_html` (por eso el dominio público necesita CORS explícito en `config/db.js`/`index.js` para hablarle a la API — no comparten origen). Antes se subía a mano por hPanel en cada cambio; ahora lo hace `deploy-frontend.yml` automáticamente.
+- Base de datos MySQL y el relay SMTP (`smtp.hostinger.com`, hardcodeado en `config/mailer.js`) también viven ahí.
 
 ## Filosofía de desarrollo
 
