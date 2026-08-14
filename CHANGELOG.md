@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.4](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.3...v1.10.4) (2026-08-14)
+
+
+### Bug Fixes
+
+* correr deploy de frontend en todo push a main ([65d52d8](https://github.com/Marthinmezaa/cosmos-track/commit/65d52d8729a4065c3e5d3c6062f41e3b026a38f7))
+* correr deploy de frontend en todo push a main, no solo cambios de frontend ([efea35c](https://github.com/Marthinmezaa/cosmos-track/commit/efea35c4f43d313b653f85ae338da0b8b65af557))
+
 ## [1.10.3](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.2...v1.10.3) (2026-08-14)
 
 
