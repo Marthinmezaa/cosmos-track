@@ -23,7 +23,38 @@ jobs:
       - name: Obtener el código fuente
         uses: actions/checkout@v4
 
-      - name: Deploy vía FTPS a Hostinger
+      # El FTP de Hostinger tira errores transitorios (550) seguido al subir
+      # los 78 archivos completos -- reintenta hasta 3 veces antes de
+      # darse por vencido. FTP-Deploy-Action no tiene reintento propio, asi
+      # que se repite el step con condicionales en vez de envolverlo con
+      # una action de retry generica (esas no envuelven steps "uses:").
+      - name: Deploy vía FTPS a Hostinger (intento 1)
+        id: deploy1
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./frontend/
+          server-dir: ${{ secrets.HOSTINGER_FTP_SERVER_DIR }}
+
+      - name: Deploy vía FTPS a Hostinger (intento 2)
+        id: deploy2
+        if: steps.deploy1.outcome == 'failure'
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./frontend/
+          server-dir: ${{ secrets.HOSTINGER_FTP_SERVER_DIR }}
+
+      - name: Deploy vía FTPS a Hostinger (intento 3)
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.HOSTINGER_FTP_SERVER }}
