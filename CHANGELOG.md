@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.5](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.4...v1.10.5) (2026-08-14)
+
+
+### Bug Fixes
+
+* agregar deploy programado del frontend cada 15 min ([f6e0af5](https://github.com/Marthinmezaa/cosmos-track/commit/f6e0af5a7444e46d76c733133fc853b225b03d97))
+* agregar deploy programado del frontend cada 15 min ([69dfa38](https://github.com/Marthinmezaa/cosmos-track/commit/69dfa385e3e857039d4f7cbb53199966946daaa0))
+
 ## [1.10.4](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.3...v1.10.4) (2026-08-14)
 
 
