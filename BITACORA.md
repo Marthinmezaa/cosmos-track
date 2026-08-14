@@ -34,6 +34,8 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
   - **Fix**: se amplió el trigger de `deploy-frontend.yml` para correr en **todo** push a `main` (se sacó el filtro `paths: frontend/**`) — así se auto-repara `public_html` después de cada redeploy del backend, sea cual sea el cambio que lo disparó.
   - Restaurado de nuevo con un disparo manual del workflow, confirmado con curl (200 OK).
 
+- **2026-08-14** — Con el trigger ampliado (PR #77), el primer deploy tiró un error FTP transitorio (`550 Rename of hidden file... failed`) al subir los 78 archivos — reintentado a mano, pasó limpio la segunda vez. Nota importante para el futuro: como `public_html` (con el archivo de estado de `FTP-Deploy-Action` adentro) se vacía en cada push, **todo deploy de ahora en más va a ser una resubida completa** (78 archivos, ~54 MB), no un sync incremental — más lento y con más chance de toparse con hipos como este. Sin reintento automático todavía; por ahora se resuelve re-disparando el workflow a mano si falla.
+
 ## Pendientes / próximos pasos
 
-Sin pendientes abiertos por ahora — `deploy-frontend.yml` corre en cada push a `main` y mantiene `public_html` sincronizado pase lo que pase.
+- [ ] Evaluar agregar reintento automático a `deploy-frontend.yml` (ver nota arriba) si los hipos de FTP se repiten seguido.
