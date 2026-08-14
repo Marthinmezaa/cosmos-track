@@ -24,6 +24,8 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 - **2026-08-14** — Se detectó por qué el frontend no se actualizaba solo en Hostinger: el backend tiene su propio auto-deploy por Git (Node.js App de Hostinger), pero el dominio público sirve el frontend como sitio estático aparte desde `public_html` — son dos despliegues independientes, no uno. Se agregó `.github/workflows/deploy-frontend.yml`: sube `frontend/` por FTPS a Hostinger en cada push a `main` que toque esa carpeta, más un `workflow_dispatch` para poder dispararlo a mano. Se cargaron los 4 secrets en GitHub (`HOSTINGER_FTP_SERVER`, `HOSTINGER_FTP_USERNAME`, `HOSTINGER_FTP_PASSWORD`, `HOSTINGER_FTP_SERVER_DIR=/`) y se probó con un disparo manual: **funcionó** (deploy verde en 1m6s). Ya no hace falta subir el frontend a mano por hPanel.
 
+- **2026-08-14** — Se resolvió la causa raíz del desfasaje de versión: se agregaron `release-please-config.json` + `.release-please-manifest.json` (modo manifest, paquete raíz `"."`, tags y `CHANGELOG.md` sin cambios) con `extra-files` apuntando por jsonpath a `backend/package.json` y `backend/package-lock.json`. A partir del próximo release, `release-please` bumpea esos archivos solo — no hace falta acordarse más de hacerlo a mano. Manifest sembrado en `1.10.0` para no perder continuidad con los tags existentes.
+
 ## Pendientes / próximos pasos
 
-- [ ] Configurar `release-please-config.json` + manifest para que `backend/package.json` se mantenga sincronizado solo (evita repetir el bump manual en cada release).
+Sin pendientes abiertos por ahora.
