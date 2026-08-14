@@ -51,11 +51,13 @@ npm run dev       # node --watch index.js (auto-reinicio)
 - `.github/workflows/release-please.yml` — automatiza bumps de versión/releases a partir de Conventional Commits en `main`.
 ## Hosting
 
-Todo corre en **Hostinger**, en un solo despliegue: un Node.js App con auto-deploy por Git que clona el repo completo (incluido `frontend/`) y arranca `backend/index.js`, que sirve el frontend como estático (ver Arquitectura arriba) — **no** hay un hosting estático separado para el frontend, es la misma app Express. La whitelist de CORS con varios orígenes en `index.js` es resabio de una migración vieja a Render, no evidencia de un segundo despliegue — no te dejes engañar por eso (ya nos pasó una vez, ver `BITACORA.md`, incidente del 14/08).
+Todo corre en **Hostinger**, en **dos despliegues separados** (confirmado en hPanel → Despliegues, no es una suposición):
+- **Backend**: Node.js App con auto-deploy por Git, con "Directorio root" configurado en `backend` — clona *solo* esa carpeta, nunca `frontend/`. Se actualiza solo en cada push a `main`.
+- **Frontend**: sitio estático servido desde `public_html`, **fuera** del control de Git — se sube a mano por hPanel (Archivos → Administrador de archivos). Ojo al subir: hay que subir el *contenido* de `frontend/` directo a `public_html/` (`index.html`, `flotas.html`, `particulares.html`, `assets/`), no la carpeta `frontend` completa adentro — eso deja todo un nivel de más (`public_html/frontend/index.html`) y el sitio muestra 404 (nos pasó el 14/08, ver `BITACORA.md`).
 
-Base de datos MySQL y el relay SMTP (`smtp.hostinger.com`, hardcodeado en `config/mailer.js`) también viven ahí.
+La whitelist de CORS con varios orígenes en `index.js` es resabio de una migración vieja a Render — dato de contexto, no evidencia por sí sola de cómo está armado el hosting hoy (esa pista sola nos hizo dudar de este diagnóstico más de una vez el 14/08; lo que lo confirma es la pantalla de Despliegues en hPanel).
 
-**No agregar un deploy paralelo por FTP/SFTP a este mismo árbol de archivos** — ya se probó y corrompió el despliegue de Git del Node App (ver incidente en `BITACORA.md`). Si hace falta automatizar algo del deploy, primero confirmar en hPanel cómo está armado el Node.js App actual, no asumir.
+Base de datos MySQL y el relay SMTP (`smtp.hostinger.com`, hardcodeado en `config/mailer.js`) también viven en Hostinger.
 
 ## Filosofía de desarrollo
 
