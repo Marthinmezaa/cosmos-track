@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.3](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.2...v1.10.3) (2026-08-14)
+
+
+### Bug Fixes
+
+* desactivar deploy por FTP del frontend, rompio el sitio ([ae27472](https://github.com/Marthinmezaa/cosmos-track/commit/ae274723c20fb67c97354c7746e92497f3e92dfe))
+* desactivar deploy por FTP del frontend, rompio el sitio en produccion ([069d8cc](https://github.com/Marthinmezaa/cosmos-track/commit/069d8ccb06e6c3f93b42c2287bd6d2e381934aa4))
+
 ## [1.10.2](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.1...v1.10.2) (2026-08-14)
 
 
