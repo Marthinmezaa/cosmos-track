@@ -20,8 +20,8 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 ## Estado actual
 
-- **2026-08-14** — Se creó `CLAUDE.md` (arquitectura) y esta bitácora. Se detectó y documentó un bug real: `backend/package.json` quedó en `1.4.0` pero el sitio ya lleva `1.10.0` publicado (`CHANGELOG.md`), porque `release-please` no tiene manifest y no toca ese archivo. El footer del sitio (`/api/version`) está mostrando la versión vieja en producción. **Pendiente de decisión**: arreglar a mano o configurar el manifest de `release-please` para que lo mantenga sincronizado solo.
+- **2026-08-14** — Se creó `CLAUDE.md` (arquitectura) y esta bitácora. Se detectó un bug real: `backend/package.json` quedó en `1.4.0` pero el sitio ya llevaba `1.10.0` publicado (`CHANGELOG.md`), porque `release-please` no tiene manifest y no toca ese archivo — el footer (`/api/version`) mostraba la versión vieja en producción. Se resolvió con bump manual a `1.10.0` en rama aparte (`fix/sincronizar-version-backend`, pendiente de merge). Causa raíz sin resolver todavía: sin manifest, va a desincronizarse de nuevo en el próximo release si no se recuerda bumpear a mano.
 
 ## Pendientes / próximos pasos
 
-- [ ] Resolver el desfasaje de versión en `backend/package.json` (ver arriba).
+- [ ] Configurar `release-please-config.json` + manifest para que `backend/package.json` se mantenga sincronizado solo (evita repetir el bump manual en cada release).
