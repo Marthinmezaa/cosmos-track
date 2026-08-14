@@ -44,7 +44,8 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
   - Se intentó cambiar "Directorio root" en hPanel → Panel: **no hay control editable en la UI**, parece fijarse solo al conectar el repo por primera vez. Recrear el Node.js App desde cero para cambiarlo es riesgoso (se perderían variables de entorno, conexión a DB, dominio, SSL, CDN ya configurados) — no se hizo hoy.
   - **Mitigación aplicada**: se agregó un trigger `schedule` a `deploy-frontend.yml` (cada 15 min) además del trigger por push, como red de seguridad — no arregla la causa de fondo, pero acota la ventana de sitio caído a como máximo ~15 minutos sin intervención manual.
 
+- **2026-08-14** — Tercer hipo de FTP transitorio en el día (`550 ..: No such file or directory`), esta vez en el deploy automático del merge de PR #80. Con tres errores distintos en un mismo día confirmado que no es casualidad — se agregó reintento automático (3 intentos) a `deploy-frontend.yml`, repitiendo el step con condicionales (`FTP-Deploy-Action` no tiene retry propio, y las actions genéricas de retry no envuelven steps `uses:`).
+
 ## Pendientes / próximos pasos
 
-- [ ] Evaluar agregar reintento automático a `deploy-frontend.yml` si los hipos de FTP se repiten seguido.
 - [ ] Arreglo de fondo pendiente: contactar soporte de Hostinger para pedir que cambien el "Directorio root" del Node.js App de `backend` a la raíz del repo (o preguntar si existe otra forma de lograrlo sin recrear la app) — eso eliminaría la necesidad de `public_html`/`deploy-frontend.yml` por completo, volviendo a la arquitectura original que el código ya asume (`index.js` sirviendo `../frontend` directo).
