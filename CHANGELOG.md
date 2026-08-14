@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.2](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.1...v1.10.2) (2026-08-14)
+
+
+### Bug Fixes
+
+* deduplicar entrada 1.10.1 en CHANGELOG.md ([f83c00e](https://github.com/Marthinmezaa/cosmos-track/commit/f83c00e596babf4e1465c439cfa05757d0596cfa))
+* deduplicar entrada 1.10.1 en CHANGELOG.md ([09ee032](https://github.com/Marthinmezaa/cosmos-track/commit/09ee032225019303b8865e0c0dd403f67ff06f69))
+
 ## [1.10.1](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.0...v1.10.1) (2026-08-14)
 
 
