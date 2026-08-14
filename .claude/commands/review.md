@@ -1,1 +1,0 @@
-Analiza el código modificado recientemente en Git. Busca posibles fallos de seguridad, código duplicado o violaciones a las reglas definidas en CLAUDE.md.

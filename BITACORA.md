@@ -12,7 +12,7 @@ Todo corre en **Hostinger**: base de datos MySQL, SMTP (`smtp.hostinger.com`) y 
 
 ## Filosofía de desarrollo
 
-Gentle AI + Ponytail + Clean Code, reglas completas en `.claude/CLAUDE.md`. En corto: minimalismo real (YAGNI), cero abstracciones especulativas, código que se explica solo, enseñar el porqué de cada decisión no trivial.
+Gentle AI + Ponytail + Clean Code, reglas completas en `CLAUDE.md`. En corto: minimalismo real (YAGNI), cero abstracciones especulativas, código que se explica solo, enseñar el porqué de cada decisión no trivial.
 
 ## Flujo de Git
 
@@ -20,7 +20,7 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 ## Estado actual
 
-- **2026-08-14** — Se creó `CLAUDE.md` (arquitectura) y esta bitácora. Se detectó un bug real: `backend/package.json` quedó en `1.4.0` pero el sitio ya llevaba `1.10.0` publicado (`CHANGELOG.md`), porque `release-please` no tiene manifest y no toca ese archivo — el footer (`/api/version`) mostraba la versión vieja en producción. Se resolvió con bump manual a `1.10.0` en rama aparte (`fix/sincronizar-version-backend`, pendiente de merge). Causa raíz sin resolver todavía: sin manifest, va a desincronizarse de nuevo en el próximo release si no se recuerda bumpear a mano.
+- **2026-08-14** — Se creó `CLAUDE.md` (arquitectura) y esta bitácora, en castellano. Se eliminó el viejo `.claude/CLAUDE.md` y `.claude/commands/review.md` (decisión intencional de Marthin al correr `/init`, quería un `CLAUDE.md` nuevo de cero) — la filosofía Gentle AI + Ponytail + Clean Code que tenían quedó consolidada directamente en `CLAUDE.md`, ya no vive en un archivo separado. Se detectó un bug real: `backend/package.json` quedó en `1.4.0` pero el sitio ya llevaba `1.10.0` publicado (`CHANGELOG.md`), porque `release-please` no tiene manifest y no toca ese archivo — el footer (`/api/version`) mostraba la versión vieja en producción. Se resolvió con bump manual a `1.10.0` en rama aparte (`fix/sincronizar-version-backend`, pendiente de merge). Causa raíz sin resolver todavía: sin manifest, va a desincronizarse de nuevo en el próximo release si no se recuerda bumpear a mano.
 
 ## Pendientes / próximos pasos
 

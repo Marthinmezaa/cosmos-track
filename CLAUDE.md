@@ -56,7 +56,17 @@ Todo corre en **Hostinger**: la base de datos MySQL, el relay SMTP (`smtp.hostin
 
 ## Filosofía de desarrollo
 
-Este proyecto sigue Gentle AI (enseñar a través de la implementación, nada de magia sin explicar) + Ponytail (minimalismo despiadado, YAGNI, cero abstracciones especulativas) + Clean Code. Las reglas completas viven en `.claude/CLAUDE.md` — leelo antes de hacer cambios no triviales; este archivo no las repite.
+Este proyecto combina Gentle AI + Ponytail + Clean Code. En la práctica:
+
+- **YAGNI primero:** antes de escribir código nuevo, preguntate si hace falta de verdad. Resolvé el problema de hoy con la mínima lógica viable, nada "por si acaso".
+- **La jerarquía Ponytail**, en orden: ¿hace falta esto? → ¿lo resuelve el estándar del lenguaje/plataforma (CSS/HTML/SQL nativo)? → ¿lo resuelve una dependencia que ya está instalada? → ¿es un one-liner legible? → recién ahí, código nuevo.
+- **Cero dependencias nuevas** salvo que hacerlo nativo implique un esfuerzo desproporcionado.
+- **Cambios quirúrgicos:** el diff más chico y aislado posible; preservar la funcionalidad existente salvo que se pida lo contrario.
+- **Código autoexplicativo:** nombres claros, sin números mágicos, comentarios mínimos (el código explica el qué; el comentario, cuando existe, explica el porqué).
+- **Cazar código muerto:** borrar activamente lo que quedó sin usar u obsoleto, en vez de acumularlo.
+- **Debugging por causa raíz:** identificar por qué pasó el bug, no solo taparlo — y explicar el motivo, no solo el parche.
+- **Enseñar mientras se implementa:** si hay una alternativa más simple, explicarla y recomendarla en vez de aceptar en silencio una decisión sobre-diseñada.
+- Correctitud > cleverness. Minimalismo > escalabilidad teórica. La simplicidad radical es la medida de calidad.
 
 ## Flujo de Git
 
