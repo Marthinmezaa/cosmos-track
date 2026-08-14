@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.5...v1.10.6) (2026-08-14)
+
+
+### Bug Fixes
+
+* agregar reintento automatico al deploy de frontend ([c92fe29](https://github.com/Marthinmezaa/cosmos-track/commit/c92fe29491f7da57478b8b85c62128c132a24aae))
+
 ## [1.10.5](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.4...v1.10.5) (2026-08-14)
 
 
