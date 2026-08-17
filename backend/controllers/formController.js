@@ -3,10 +3,27 @@ const { sendContactEmail } = require('../config/mailer');
 const { sendWhatsAppNotification } = require('../config/whatsapp');
 
 const TELEFONO_REGEX = /^0\d{9}$/;
+const TIPOS_FORMULARIO_VALIDOS = ['contacto', 'cotizacion'];
 
 const submitForm = async (req, res) => {
     try {
         const formData = req.body;
+
+        // Validar campos NOT NULL del schema (contactos) antes de guardar o notificar nada,
+        // para no depender de que MySQL rechace el INSERT y el contacto se pierda en el catch genérico.
+        if (!formData.nombre || !formData.nombre.trim()) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'El nombre es obligatorio'
+            });
+        }
+
+        if (!TIPOS_FORMULARIO_VALIDOS.includes(formData.tipo_formulario)) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Tipo de formulario inválido'
+            });
+        }
 
         // Validar formato estricto de teléfono antes de guardar o notificar nada
         if (!TELEFONO_REGEX.test(formData.telefono || '')) {
@@ -27,13 +44,13 @@ const submitForm = async (req, res) => {
             // No bloqueamos la respuesta si solo falla el correo
         }
 
-        // 3. Enviar WhatsApp (solo para cotizaciones)
+        // 3. Enviar WhatsApp (solo para cotizaciones) — sin esperar la respuesta:
+        // CallMeBot (nivel gratuito) puede tardar, y el contacto ya quedó
+        // guardado; no tiene sentido dejar al usuario esperando por esto.
         if (formData.tipo_formulario === 'cotizacion') {
-            try {
-                await sendWhatsAppNotification(formData);
-            } catch (waError) {
+            sendWhatsAppNotification(formData).catch((waError) => {
                 console.error('Error al enviar WhatsApp:', waError);
-            }
+            });
         }
 
         res.status(201).json({
