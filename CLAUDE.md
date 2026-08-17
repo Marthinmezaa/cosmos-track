@@ -20,7 +20,7 @@ npm run dev       # node --watch index.js (auto-reinicio)
 - No existe suite de tests — `npm test` es un stub sin configurar que sale con error.
 - No hay lint/formateo configurado.
 - DB local: correr `backend/models/schema.sql` contra MySQL para crear la tabla `contactos`.
-- Variables de entorno requeridas (`backend/.env`, gitignored): `PORT`, `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_SSL`/`DB_SSL_REJECT_UNAUTHORIZED` (opcional), `DB_CONNECTION_LIMIT` (opcional), `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_TO`, `WHATSAPP_PHONE_ADMIN`, `WHATSAPP_APIKEY_ADMIN`, `WHATSAPP_PHONE_CLIENT`/`WHATSAPP_APIKEY_CLIENT` (opcional, segundo destinatario de notificación).
+- Variables de entorno requeridas (`backend/.env`, gitignored): `PORT`, `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_SSL`/`DB_SSL_REJECT_UNAUTHORIZED` (opcional), `DB_CONNECTION_LIMIT` (opcional), `EMAIL_PASS`, `EMAIL_TO`, `WHATSAPP_PHONE_ADMIN`, `WHATSAPP_APIKEY_ADMIN`, `WHATSAPP_PHONE_CLIENT`/`WHATSAPP_APIKEY_CLIENT` (opcional, segundo destinatario de notificación). El usuario SMTP (remitente) está hardcodeado en `config/mailer.js`, no viene de env.
 
 ## Arquitectura
 
