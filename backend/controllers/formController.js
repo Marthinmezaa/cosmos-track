@@ -44,13 +44,13 @@ const submitForm = async (req, res) => {
             // No bloqueamos la respuesta si solo falla el correo
         }
 
-        // 3. Enviar WhatsApp (solo para cotizaciones)
+        // 3. Enviar WhatsApp (solo para cotizaciones) — sin esperar la respuesta:
+        // CallMeBot (nivel gratuito) puede tardar, y el contacto ya quedó
+        // guardado; no tiene sentido dejar al usuario esperando por esto.
         if (formData.tipo_formulario === 'cotizacion') {
-            try {
-                await sendWhatsAppNotification(formData);
-            } catch (waError) {
+            sendWhatsAppNotification(formData).catch((waError) => {
                 console.error('Error al enviar WhatsApp:', waError);
-            }
+            });
         }
 
         res.status(201).json({

@@ -26,8 +26,11 @@ const sendWhatsAppNotification = async (contactData) => {
         }
     ];
 
-    for (const recipient of recipients) {
-        if (recipient.phone && recipient.apikey) {
+    // En paralelo: CallMeBot (nivel gratuito) puede ser lento, y no hay razón
+    // para que el segundo destinatario espere a que termine el primero.
+    const envios = recipients
+        .filter((recipient) => recipient.phone && recipient.apikey)
+        .map(async (recipient) => {
             try {
                 // Usamos URLSearchParams o el objeto params de axios para asegurar el encoding correcto
                 await axios.get('https://api.callmebot.com/whatsapp.php', {
@@ -41,8 +44,9 @@ const sendWhatsAppNotification = async (contactData) => {
             } catch (error) {
                 console.error(`Error enviando WhatsApp a ${recipient.phone}:`, error.message);
             }
-        }
-    }
+        });
+
+    await Promise.allSettled(envios);
 };
 
 module.exports = { sendWhatsAppNotification };
