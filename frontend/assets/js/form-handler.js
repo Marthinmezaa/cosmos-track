@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Manejar el formulario de cotización (el de arriba) o instalación
-    const quoteForms = document.querySelectorAll('.courses-form, #installForm');
+    // form.courses-form (no solo .courses-form): en flotas.html/particulares.html
+    // .courses-form es un <div> contenedor de #installForm, no un <form>. Sin el
+    // prefijo "form" el selector matcheaba ambos nodos y el submit (que hace
+    // bubbling) disparaba dos veces el envío del mismo formulario.
+    const quoteForms = document.querySelectorAll('form.courses-form, #installForm');
     quoteForms.forEach(form => {
         form.addEventListener('submit', function(event) {
             event.preventDefault();
