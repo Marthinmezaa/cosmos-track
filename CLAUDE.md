@@ -24,6 +24,8 @@ npm run dev       # node --watch index.js (auto-reinicio)
 
 ## Arquitectura
 
+Ver también `docs/system-design.html` — diagrama visual vivo del flujo de una request y del pipeline de deploy; actualizarlo (con su REV) cada vez que cambie algo de lo que describe esta sección.
+
 **Dos carpetas, un solo servidor.** `backend/index.js` es el único punto de entrada: monta las rutas de la API, sirve `frontend/` como archivos estáticos, y para cualquier ruta que no sea `/api` cae en `frontend/index.html` (URLs limpias, no es una SPA — el frontend no tiene router del lado del cliente).
 
 **Frontend (`frontend/`)** — HTML5/CSS3 plano + jQuery, sin build, sin framework. Tres páginas: `index.html`, `flotas.html`, `particulares.html`, compartiendo `assets/{css,js,img,fonts}`.
