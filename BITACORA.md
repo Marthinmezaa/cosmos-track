@@ -48,6 +48,9 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 - **2026-08-17 — Se dio de baja `deploy-frontend.yml`, vuelta a subida 100% manual.** Marthin decidió que la automatización (push a main + FTPS + cron cada 15 min de red de seguridad + reintentos) generó más problemas de los que resolvió — tres caídas de sitio en un solo día (14/08) contra un problema que hPanel resuelve en dos clics. Se borró el workflow completo; el frontend vuelve a subirse a mano por hPanel en cada modificación, como ya documentaba `CLAUDE.md` (el código automatizado había quedado desincronizado de esa doc, no al revés). El pendiente de contactar a soporte de Hostinger para el "Directorio root" queda cerrado por decisión, no por resolución técnica — no hace falta si no se vuelve a automatizar el deploy del frontend.
 
+- **2026-08-17 — Se agregó `docs/system-design.html`, diagrama vivo de arquitectura.** Rama `docs/system-design-diagrama`. Marthin pidió un system design visual tipo blueprint para entender el proyecto de un vistazo (heredó el código de un desarrollador anterior que desapareció). Es un artifact HTML autocontenido con dos figuras: el flujo de una request (edge de Hostinger → estático o Node App → capas del backend → MySQL/SMTP/CallMeBot) y el pipeline de deploy (marca explícitamente que no hay conexión automática hacia `public_html`, la causa de las caídas del 14/08). Tiene bloque de revisión (REV, fecha, notas) al pie — **actualizar ahí y volver a publicar el mismo artifact cada vez que cambie algo de arquitectura real**, no dejar que se desactualice como un diagrama estático de una sola vez.
+
 ## Pendientes / próximos pasos
 
+- Mantener `docs/system-design.html` al día — si cambia el hosting, las rutas del backend, o los servicios externos, actualizar el diagrama (y su REV) en el mismo cambio que toca el código.
 - Sin pendientes de deploy del frontend por ahora — subida manual por hPanel, como antes.
