@@ -1,0 +1,467 @@
+<title>Cosmos Trak System Design</title>
+<style>
+  :root {
+    --paper: #eef4fb;
+    --paper-2: #dfe9f5;
+    --surface: #ffffff;
+    --ink: #142a45;
+    --ink-soft: #4a6485;
+    --ink-faint: #8aa3bf;
+    --grid-line: #c9dbee;
+    --rule: #9db6d1;
+    --accent: #ff5f2e;
+    --accent-ink: #ffffff;
+    --accent-soft: #ffe3d6;
+    --ext: #0f9c8d;
+    --ext-soft: #d7f1ec;
+    --warn-bg: #fff1e8;
+    --warn-border: #ff5f2e;
+    --shadow: rgba(20, 42, 69, 0.14);
+
+    --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-body: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #071120;
+      --paper-2: #0b1826;
+      --surface: #0c1b2c;
+      --ink: #dbe9f8;
+      --ink-soft: #8fa8c4;
+      --ink-faint: #4d6685;
+      --grid-line: #16283d;
+      --rule: #26456a;
+      --accent: #ff8a5c;
+      --accent-ink: #0b1826;
+      --accent-soft: #3a2013;
+      --ext: #2fe0cb;
+      --ext-soft: #0d2a27;
+      --warn-bg: #241207;
+      --warn-border: #ff8a5c;
+      --shadow: rgba(0, 0, 0, 0.55);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #071120;
+    --paper-2: #0b1826;
+    --surface: #0c1b2c;
+    --ink: #dbe9f8;
+    --ink-soft: #8fa8c4;
+    --ink-faint: #4d6685;
+    --grid-line: #16283d;
+    --rule: #26456a;
+    --accent: #ff8a5c;
+    --accent-ink: #0b1826;
+    --accent-soft: #3a2013;
+    --ext: #2fe0cb;
+    --ext-soft: #0d2a27;
+    --warn-bg: #241207;
+    --warn-border: #ff8a5c;
+    --shadow: rgba(0, 0, 0, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper-2);
+    color: var(--ink);
+    font-family: var(--font-body);
+    padding: clamp(16px, 4vw, 48px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sheet {
+    max-width: 1180px;
+    margin: 0 auto;
+    background:
+      repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 28px),
+      var(--paper);
+    background-blend-mode: normal;
+    border: 2px solid var(--rule);
+    outline: 1px solid var(--rule);
+    outline-offset: 6px;
+    box-shadow: 0 20px 50px var(--shadow);
+    padding: clamp(20px, 4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  header.title-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 22px;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(28px, 4.4vw, 44px);
+    margin: 0;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .dek {
+    max-width: 62ch;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 4px 0 0;
+  }
+
+  section.figure-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 15px;
+    color: var(--ink);
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  h2 .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--surface);
+    background: var(--ink);
+    padding: 2px 7px;
+    letter-spacing: 0.04em;
+  }
+
+  .diagram-scroll {
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+
+  .diagram-scroll svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 860px;
+  }
+
+  figcaption {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 78ch;
+  }
+
+  svg text { font-family: var(--font-mono); fill: var(--ink); }
+  svg .lbl-title { font-weight: 700; font-size: 12.5px; letter-spacing: 0.02em; }
+  svg .lbl-sub { font-size: 10.5px; fill: var(--ink-soft); font-family: var(--font-body); font-style: italic; }
+  svg .lbl-arrow { font-size: 10.5px; fill: var(--ink-soft); }
+  svg .lbl-arrow.warn { fill: var(--accent); font-weight: 700; }
+  svg .lbl-arrow.ext { fill: var(--ext); }
+  svg .box { fill: var(--surface); stroke: var(--ink); stroke-width: 1.4; }
+  svg .box.decision { fill: var(--paper); stroke: var(--ink); stroke-width: 1.8; }
+  svg .box.chip { fill: var(--paper-2); stroke: var(--ink-faint); stroke-width: 1; }
+  svg .box.ext-node { fill: var(--ext-soft); stroke: var(--ext); stroke-width: 1.4; }
+  svg .box.warn-node { fill: var(--warn-bg); stroke: var(--warn-border); stroke-width: 1.6; }
+  svg .edge { stroke: var(--ink); stroke-width: 1.6; fill: none; }
+  svg .edge.dashed { stroke-dasharray: 5 4; }
+  svg .edge.warn { stroke: var(--accent); }
+  svg .edge.ext { stroke: var(--ext); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-line { width: 26px; height: 0; border-top: 2px solid var(--ink); }
+  .legend-line.dashed { border-top-style: dashed; }
+  .legend-line.warn { border-top-color: var(--accent); }
+  .legend-line.ext { border-top-color: var(--ext); }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .note-card {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-border);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .note-card .note-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .note-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  footer.title-block {
+    border-top: 2px solid var(--rule);
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .tb-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .tb-field .k { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; display: block; }
+  .tb-field .v { color: var(--ink); font-size: 13px; }
+
+  .rev-log {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .rev-log .rev-head {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+  .rev-log ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .rev-log li { display: grid; grid-template-columns: 34px 84px 1fr; gap: 10px; color: var(--ink-soft); }
+  .rev-log li b { color: var(--ink); }
+
+  @media (max-width: 620px) {
+    footer.title-block { grid-template-columns: 1fr; }
+    .tb-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="sheet">
+
+  <header class="title-strip">
+    <span class="eyebrow">Cosmos Trak · Monitoreo satelital &amp; rastreo GPS · Paraguay</span>
+    <h1>System Design</h1>
+    <p class="dek">Diagrama vivo de cómo funciona el sistema en producción hoy — no un diseño ideal, sino lo que confirmamos con evidencia real de hPanel, logs y código. Se actualiza cada vez que algo cambia en la arquitectura.</p>
+  </header>
+
+  <section class="figure-block">
+    <h2><span class="tag">FIG. 1</span> Cómo se resuelve una request</h2>
+    <div class="diagram-scroll">
+      <svg viewBox="0 0 1180 560" role="img" aria-label="Una request del cliente llega al edge de Hostinger, que decide entre servir un archivo estático de public_html o hacer fallback al Node.js App, cuyas capas routes, controllers, models y config terminan llamando a MySQL, al SMTP de Hostinger y, solo para cotizaciones, a la API externa de CallMeBot.">
+        <defs>
+          <marker id="arrow-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="var(--ink)" />
+          </marker>
+          <marker id="arrow-warn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="var(--accent)" />
+          </marker>
+          <marker id="arrow-ext" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="var(--ext)" />
+          </marker>
+        </defs>
+
+        <!-- Cliente -->
+        <rect class="box" x="30" y="26" width="150" height="62" />
+        <text class="lbl-title" x="105" y="52" text-anchor="middle">CLIENTE</text>
+        <text class="lbl-sub" x="105" y="70" text-anchor="middle">navegador</text>
+
+        <!-- Edge -->
+        <rect class="box decision" x="290" y="20" width="260" height="74" />
+        <text class="lbl-title" x="420" y="46" text-anchor="middle">HOSTINGER EDGE</text>
+        <text class="lbl-sub" x="420" y="63" text-anchor="middle">¿existe el archivo en public_html?</text>
+        <text class="lbl-sub" x="420" y="78" text-anchor="middle">(páginas y /api/* pasan por acá)</text>
+
+        <path class="edge" d="M180,57 H290" marker-end="url(#arrow-ink)" />
+        <text class="lbl-arrow" x="235" y="49" text-anchor="middle">toda request</text>
+
+        <!-- Frontend estatico -->
+        <rect class="box" x="70" y="180" width="300" height="128" />
+        <text class="lbl-title" x="220" y="205" text-anchor="middle">FRONTEND ESTÁTICO</text>
+        <text class="lbl-sub" x="220" y="223" text-anchor="middle">public_html/ — subida manual por hPanel</text>
+        <text class="lbl-sub" x="220" y="246" text-anchor="middle">index.html · flotas.html · particulares.html</text>
+        <text class="lbl-sub" x="220" y="264" text-anchor="middle">assets/{css, js, img, fonts}</text>
+        <text class="lbl-sub" x="220" y="288" text-anchor="middle">jQuery, sin build, sin router</text>
+
+        <path class="edge" d="M360,94 C300,120 260,140 235,180" marker-end="url(#arrow-ink)" />
+        <text class="lbl-arrow" x="255" y="140" text-anchor="middle">sí — sirve el archivo</text>
+
+        <!-- Backend box -->
+        <rect class="box" x="560" y="150" width="580" height="200" />
+        <text class="lbl-title" x="580" y="176">BACKEND — NODE.JS APP (Express)</text>
+        <text class="lbl-sub" x="580" y="193">corre desde hbuilds/versions/&lt;id&gt;/ · directorio root: backend/</text>
+
+        <rect class="box chip" x="580" y="210" width="125" height="110" />
+        <text class="lbl-title" x="642" y="232" text-anchor="middle" style="font-size:11px">routes/</text>
+        <text class="lbl-sub" x="642" y="252" text-anchor="middle">formRoutes.js</text>
+        <text class="lbl-sub" x="642" y="266" text-anchor="middle">POST /api/form/submit</text>
+        <text class="lbl-sub" x="642" y="286" text-anchor="middle">systemRoutes.js</text>
+        <text class="lbl-sub" x="642" y="300" text-anchor="middle">GET /api/version</text>
+
+        <path class="edge" d="M705,265 H735" marker-end="url(#arrow-ink)" />
+        <rect class="box chip" x="735" y="210" width="125" height="110" />
+        <text class="lbl-title" x="797" y="232" text-anchor="middle" style="font-size:11px">controllers/</text>
+        <text class="lbl-sub" x="797" y="255" text-anchor="middle">formController.js</text>
+        <text class="lbl-sub" x="797" y="272" text-anchor="middle">valida teléfono,</text>
+        <text class="lbl-sub" x="797" y="286" text-anchor="middle">nombre, tipo_formulario</text>
+
+        <path class="edge" d="M860,265 H890" marker-end="url(#arrow-ink)" />
+        <rect class="box chip" x="890" y="210" width="110" height="110" />
+        <text class="lbl-title" x="945" y="232" text-anchor="middle" style="font-size:11px">models/</text>
+        <text class="lbl-sub" x="945" y="255" text-anchor="middle">contacto.js</text>
+        <text class="lbl-sub" x="945" y="272" text-anchor="middle">Contacto.create()</text>
+
+        <path class="edge" d="M1000,265 H1025" marker-end="url(#arrow-ink)" />
+        <rect class="box chip" x="1025" y="210" width="100" height="110" />
+        <text class="lbl-title" x="1075" y="232" text-anchor="middle" style="font-size:11px">config/</text>
+        <text class="lbl-sub" x="1075" y="252" text-anchor="middle">db.js</text>
+        <text class="lbl-sub" x="1075" y="266" text-anchor="middle">mailer.js</text>
+        <text class="lbl-sub" x="1075" y="280" text-anchor="middle">whatsapp.js</text>
+
+        <path class="edge dashed warn" d="M550,94 C610,110 660,120 700,150" marker-end="url(#arrow-warn)" />
+        <text class="lbl-arrow warn" x="700" y="130" text-anchor="middle">no — fallback al Node App</text>
+
+        <!-- Servicios externos -->
+        <rect class="box" x="620" y="410" width="150" height="90" />
+        <text class="lbl-title" x="695" y="440" text-anchor="middle">MySQL DB</text>
+        <text class="lbl-sub" x="695" y="460" text-anchor="middle">tabla contactos</text>
+        <text class="lbl-sub" x="695" y="475" text-anchor="middle">(Hostinger)</text>
+        <path class="edge" d="M1075,320 C1000,360 800,380 700,410" marker-end="url(#arrow-ink)" />
+        <text class="lbl-arrow" x="880" y="378" text-anchor="middle">INSERT contactos</text>
+
+        <rect class="box" x="810" y="410" width="170" height="90" />
+        <text class="lbl-title" x="895" y="440" text-anchor="middle">SMTP</text>
+        <text class="lbl-sub" x="895" y="460" text-anchor="middle">smtp.hostinger.com</text>
+        <text class="lbl-sub" x="895" y="475" text-anchor="middle">(hardcodeado)</text>
+        <path class="edge" d="M1080,320 C1050,355 970,385 900,410" marker-end="url(#arrow-ink)" />
+        <text class="lbl-arrow" x="1010" y="382" text-anchor="middle">sendMail — siempre</text>
+
+        <rect class="box ext-node" x="1020" y="410" width="140" height="90" />
+        <text class="lbl-title" x="1090" y="440" text-anchor="middle">CallMeBot API</text>
+        <text class="lbl-sub" x="1090" y="460" text-anchor="middle">WhatsApp (externo)</text>
+        <text class="lbl-sub" x="1090" y="475" text-anchor="middle">gratuito</text>
+        <path class="edge dashed ext" d="M1100,320 C1100,355 1095,385 1090,410" marker-end="url(#arrow-ext)" />
+        <text class="lbl-arrow ext" x="1150" y="360" text-anchor="middle" transform="rotate(90 1150,360)">solo cotización</text>
+      </svg>
+    </div>
+    <figcaption>Una misma decisión en el edge de Hostinger resuelve tanto las páginas como la API: si <code>public_html</code> tiene el archivo, lo sirve directo; si no (como toda ruta <code>/api/*</code>), cae al Node.js App. Adentro, <code>config/</code> es el único punto que sabe hablar con MySQL, SMTP y CallMeBot.</figcaption>
+  </section>
+
+  <section class="figure-block">
+    <h2><span class="tag">FIG. 2</span> Cómo se despliega el código</h2>
+    <div class="diagram-scroll">
+      <svg viewBox="0 0 1180 300" role="img" aria-label="Un push a main dispara los workflows de CI y, por separado, el auto-deploy del Node.js App con directorio root backend. No existe ninguna conexión automática hacia el frontend público en public_html: se sube a mano por hPanel.">
+        <rect class="box" x="30" y="105" width="180" height="80" />
+        <text class="lbl-title" x="120" y="138" text-anchor="middle">GITHUB — main</text>
+        <text class="lbl-sub" x="120" y="158" text-anchor="middle">push / PR</text>
+
+        <rect class="box chip" x="290" y="20" width="230" height="70" />
+        <text class="lbl-title" x="405" y="45" text-anchor="middle" style="font-size:11.5px">devsecops.yml</text>
+        <text class="lbl-sub" x="405" y="63" text-anchor="middle">Gitleaks + npm audit</text>
+
+        <rect class="box chip" x="290" y="205" width="230" height="70" />
+        <text class="lbl-title" x="405" y="230" text-anchor="middle" style="font-size:11.5px">release-please.yml</text>
+        <text class="lbl-sub" x="405" y="248" text-anchor="middle">PR de bump de versión</text>
+
+        <path class="edge" d="M210,130 C250,110 260,75 290,55" marker-end="url(#arrow-ink)" />
+        <path class="edge" d="M210,150 C250,175 260,220 290,240" marker-end="url(#arrow-ink)" />
+
+        <rect class="box" x="590" y="105" width="250" height="80" />
+        <text class="lbl-title" x="715" y="138" text-anchor="middle">NODE.JS APP</text>
+        <text class="lbl-sub" x="715" y="156" text-anchor="middle">auto-deploy · directorio root: backend/</text>
+        <text class="lbl-sub" x="715" y="172" text-anchor="middle">se dispara con cualquier push a main</text>
+
+        <path class="edge" d="M210,140 C350,155 480,148 590,142" marker-end="url(#arrow-ink)" />
+        <text class="lbl-arrow" x="400" y="130" text-anchor="middle">push a main (cualquiera)</text>
+
+        <rect class="box warn-node" x="930" y="105" width="220" height="80" />
+        <text class="lbl-title" x="1040" y="132" text-anchor="middle" style="fill:var(--accent)">FRONTEND PÚBLICO</text>
+        <text class="lbl-sub" x="1040" y="150" text-anchor="middle">public_html/</text>
+        <text class="lbl-sub" x="1040" y="166" text-anchor="middle" style="fill:var(--accent);font-style:normal;font-weight:700">NO se actualiza solo</text>
+
+        <line class="edge warn dashed" x1="840" y1="145" x2="930" y2="145" />
+        <text x="885" y="128" text-anchor="middle" style="font-family:var(--font-mono);font-size:16px;font-weight:700;fill:var(--accent)">✕</text>
+        <text class="lbl-arrow warn" x="885" y="185" text-anchor="middle">sin conexión — se sube a mano</text>
+      </svg>
+    </div>
+    <figcaption>El "✕" es la parte que más plata costó entender: no hay ningún paso automático entre el deploy del backend y <code>public_html</code>. Tres caídas de sitio (14/08) salieron de asumir lo contrario. Ver bitácora del 17/08 para el detalle completo de las 5 correcciones más recientes.</figcaption>
+  </section>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-line"></span> llamada interna / esperada</div>
+    <div class="legend-item"><span class="legend-line dashed warn"></span> fallback o ruta de alerta</div>
+    <div class="legend-item"><span class="legend-line dashed ext"></span> servicio externo, no bloqueante</div>
+    <div class="legend-item">recuadro con fondo <span style="color:var(--ext)">verde azulado</span> = gestionado por terceros</div>
+    <div class="legend-item">recuadro con borde <span style="color:var(--accent)">naranja</span> = punto de falla ya vivido</div>
+  </div>
+
+  <div class="notes">
+    <div class="note-card">
+      <span class="note-label">Nota de campo — 14/08</span>
+      <p><code>public_html</code> se vació solo tres veces en un día, sin correlación con ningún push a <code>frontend/</code>. Mitigado dando de baja el auto-deploy del frontend (17/08): subida 100% manual, como documenta esta misma hoja.</p>
+    </div>
+    <div class="note-card">
+      <span class="note-label">Nota de campo — 17/08</span>
+      <p>Auditoría de código heredado encontró 5 bugs reales en producción (doble envío de formularios, contactos que se perdían, HTML sin escapar en el correo, remitente SMTP inconsistente, WhatsApp bloqueando la respuesta) — los 5 corregidos, cada uno en su propia rama.</p>
+    </div>
+  </div>
+
+  <footer class="title-block">
+    <div class="tb-grid">
+      <div class="tb-field"><span class="k">Proyecto</span><span class="v">Cosmos Trak — sitio institucional</span></div>
+      <div class="tb-field"><span class="k">Archivo</span><span class="v">docs/system-design.html</span></div>
+      <div class="tb-field"><span class="k">Referencia</span><span class="v">CLAUDE.md · BITACORA.md</span></div>
+      <div class="tb-field"><span class="k">Estado</span><span class="v">documento vivo — actualizar con cada cambio de arquitectura</span></div>
+    </div>
+    <div class="rev-log">
+      <div class="rev-head">Historial de revisión</div>
+      <ol>
+        <li><b>REV 1</b><span>2026-08-17</span><span>Primera versión: arquitectura real confirmada tras la auditoría de los 5 hallazgos.</span></li>
+      </ol>
+    </div>
+  </footer>
+
+</div>
