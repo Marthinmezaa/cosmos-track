@@ -71,7 +71,6 @@ Para clonar y ejecutar este proyecto localmente, sigue estos pasos:
 
    EMAIL_HOST=smtp.hostinger.com
    EMAIL_PORT=465
-   EMAIL_USER=tu_email
    EMAIL_PASS=tu_password
 
    WHATSAPP_PHONE_ADMIN=...

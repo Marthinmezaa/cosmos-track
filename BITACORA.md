@@ -48,6 +48,11 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 - **2026-08-17 — Se dio de baja `deploy-frontend.yml`, vuelta a subida 100% manual.** Marthin decidió que la automatización (push a main + FTPS + cron cada 15 min de red de seguridad + reintentos) generó más problemas de los que resolvió — tres caídas de sitio en un solo día (14/08) contra un problema que hPanel resuelve en dos clics. Se borró el workflow completo; el frontend vuelve a subirse a mano por hPanel en cada modificación, como ya documentaba `CLAUDE.md` (el código automatizado había quedado desincronizado de esa doc, no al revés). El pendiente de contactar a soporte de Hostinger para el "Directorio root" queda cerrado por decisión, no por resolución técnica — no hace falta si no se vuelve a automatizar el deploy del frontend.
 
+- **2026-08-17 — Fix #4: remitente SMTP con dos fuentes de verdad, resuelto.** Rama `fix/unificar-remitente-smtp`. Parte de la auditoría completa del repo pedida por Marthin (detalle de los 5 hallazgos en la bitácora de la rama hermana `fix/doble-envio-formulario-instalacion`, sin mergear todavía).
+  - **Problema**: `mailer.js` autenticaba contra Hostinger con el usuario SMTP hardcodeado (`info@cosmostrak.com.py`), pero el header `From` del correo salía de `process.env.EMAIL_USER`. Si el `.env` de producción tenía un valor distinto ahí, Hostinger podía rechazar o reescribir el envío — y el error quedaba silenciado en el try/catch de `formController.js`, así que una notificación podía dejar de llegar sin que nadie se entere.
+  - **Fix**: se extrajo `SMTP_USER` como única fuente de verdad, usada tanto en `auth.user` como en el `From`. `EMAIL_USER` quedó sin uso — se sacó de la lista de env vars en `CLAUDE.md` y del `.env` de ejemplo en `README.md` para no dejar documentación de una variable muerta.
+  - Cambio de una sola constante, sin lógica nueva — no amerita test (YAGNI aplica también a tests). Verificado con `require()` directo que el módulo sigue cargando bien.
+
 ## Pendientes / próximos pasos
 
-- Sin pendientes de deploy del frontend por ahora — subida manual por hPanel, como antes.
+- Fix #5 (WhatsApp secuencial bloqueando la respuesta) de la auditoría del 2026-08-17, en rama separada (detalle completo en la entrada de bitácora de la rama `fix/doble-envio-formulario-instalacion`).

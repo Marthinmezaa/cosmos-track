@@ -1,12 +1,19 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+// Único origen de verdad para el remitente: se usa tanto para autenticar en
+// el SMTP de Hostinger como para el header "From" del correo. Antes el From
+// salía de process.env.EMAIL_USER, que podía no coincidir con este usuario —
+// Hostinger rechaza (o reescribe) un From que no matchea el usuario SMTP
+// autenticado, y ese fallo quedaba silencioso (ver catch en submitForm).
+const SMTP_USER = "info@cosmostrak.com.py";
+
 const transporter = nodemailer.createTransport({
   host: "smtp.hostinger.com", // Forzamos la dirección correcta aquí
   port: 587,
   secure: false, // true para puerto 465, false para otros puertos
   auth: {
-    user: "info@cosmostrak.com.py", // Forzamos el usuario aquí
+    user: SMTP_USER,
     pass: process.env.EMAIL_PASS, // Dejamos solo la contraseña oculta por seguridad
   },
   tls: {
@@ -49,7 +56,7 @@ const sendContactEmail = async (contactData) => {
 
   try {
     await transporter.sendMail({
-      from: `"CosmosTrak Web" <${process.env.EMAIL_USER}>`,
+      from: `"CosmosTrak Web" <${SMTP_USER}>`,
       to: process.env.EMAIL_TO,
       subject: subject,
       html: htmlContent,
