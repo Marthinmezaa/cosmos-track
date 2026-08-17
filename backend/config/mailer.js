@@ -22,6 +22,14 @@ const transporter = nodemailer.createTransport({
   family: 4,
 });
 
+// Escapa los campos del formulario antes de meterlos en el HTML del correo:
+// vienen sin sanitizar desde el formulario público (ver formController.js).
+const escapeHtml = (value) =>
+  String(value ?? "").replace(
+    /[&<>"']/g,
+    (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char])
+  );
+
 const sendContactEmail = async (contactData) => {
   const {
     nombre,
@@ -41,15 +49,15 @@ const sendContactEmail = async (contactData) => {
 
   const htmlContent = `
         <h2>Nueva notificación desde CosmosTrak Web</h2>
-        <p><strong>Tipo:</strong> ${tipo_formulario.toUpperCase()}</p>
-        <p><strong>Nombre:</strong> ${nombre}</p>
-        ${apellido ? `<p><strong>Apellido:</strong> ${apellido}</p>` : ""}
-        <p><strong>Teléfono:</strong> ${telefono}</p>
-        ${email ? `<p><strong>Email:</strong> ${email}</p>` : ""}
-        ${servicio ? `<p><strong>Servicio solicitado:</strong> ${servicio}</p>` : ""}
-        ${asunto ? `<p><strong>Asunto:</strong> ${asunto}</p>` : ""}
+        <p><strong>Tipo:</strong> ${escapeHtml(tipo_formulario).toUpperCase()}</p>
+        <p><strong>Nombre:</strong> ${escapeHtml(nombre)}</p>
+        ${apellido ? `<p><strong>Apellido:</strong> ${escapeHtml(apellido)}</p>` : ""}
+        <p><strong>Teléfono:</strong> ${escapeHtml(telefono)}</p>
+        ${email ? `<p><strong>Email:</strong> ${escapeHtml(email)}</p>` : ""}
+        ${servicio ? `<p><strong>Servicio solicitado:</strong> ${escapeHtml(servicio)}</p>` : ""}
+        ${asunto ? `<p><strong>Asunto:</strong> ${escapeHtml(asunto)}</p>` : ""}
         <p><strong>Mensaje:</strong></p>
-        <p>${mensaje || "Sin mensaje"}</p>
+        <p>${mensaje ? escapeHtml(mensaje) : "Sin mensaje"}</p>
         <hr>
         <p>Este correo fue generado automáticamente desde el servidor del sitio web.</p>
     `;
@@ -68,4 +76,4 @@ const sendContactEmail = async (contactData) => {
   }
 };
 
-module.exports = { sendContactEmail };
+module.exports = { sendContactEmail, escapeHtml };
