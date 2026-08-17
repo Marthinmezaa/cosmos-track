@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.10.7](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.6...v1.10.7) (2026-08-17)
+
+
+### Bug Fixes
+
+* evitar doble envio en formularios de instalacion ([a132990](https://github.com/Marthinmezaa/cosmos-track/commit/a132990e462618e6a9e40aa8d06d61ff4c0dd65b))
+* evitar doble envio en formularios de instalacion ([fdc08f6](https://github.com/Marthinmezaa/cosmos-track/commit/fdc08f6191ced33085b1178e3a42c159c8decca4))
+* **mailer:** escapar HTML en el correo de notificacion ([a970c55](https://github.com/Marthinmezaa/cosmos-track/commit/a970c555cada99436866bec166751eaca90fd03a))
+* **mailer:** escapar HTML en el correo de notificacion ([a8508ad](https://github.com/Marthinmezaa/cosmos-track/commit/a8508ad6a89b8432d4cd9fe578be8534154d730e))
+* **mailer:** unificar remitente SMTP en una sola fuente de verdad ([0ff4b40](https://github.com/Marthinmezaa/cosmos-track/commit/0ff4b40054122ba053c875aabf6b759bcd0eba1b))
+* **mailer:** unificar remitente SMTP en una sola fuente de verdad ([5512548](https://github.com/Marthinmezaa/cosmos-track/commit/55125480d97b126bf462029d97ed5466c45c0a2b))
+* paralelizar notificaciones de WhatsApp y no bloquear la respuesta ([1392163](https://github.com/Marthinmezaa/cosmos-track/commit/1392163d8e9d5236e073774d741dd165c3c02409))
+* paralelizar notificaciones de WhatsApp y no bloquear la respuesta ([203febd](https://github.com/Marthinmezaa/cosmos-track/commit/203febd55b816ac3287978469b28edefede725cb))
+* validar nombre y tipo_formulario antes de guardar el contacto ([c84ab3e](https://github.com/Marthinmezaa/cosmos-track/commit/c84ab3e879924653c2d4732d3b2dbef5fca490a7))
+* validar nombre y tipo_formulario antes de guardar el contacto ([b001e89](https://github.com/Marthinmezaa/cosmos-track/commit/b001e89f54ad258c3d44011203b5709c565f772e))
+
 ## [1.10.6](https://github.com/Marthinmezaa/cosmos-track/compare/v1.10.5...v1.10.6) (2026-08-14)
 
 
