@@ -48,6 +48,12 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 - **2026-08-17 — Se dio de baja `deploy-frontend.yml`, vuelta a subida 100% manual.** Marthin decidió que la automatización (push a main + FTPS + cron cada 15 min de red de seguridad + reintentos) generó más problemas de los que resolvió — tres caídas de sitio en un solo día (14/08) contra un problema que hPanel resuelve en dos clics. Se borró el workflow completo; el frontend vuelve a subirse a mano por hPanel en cada modificación, como ya documentaba `CLAUDE.md` (el código automatizado había quedado desincronizado de esa doc, no al revés). El pendiente de contactar a soporte de Hostinger para el "Directorio root" queda cerrado por decisión, no por resolución técnica — no hace falta si no se vuelve a automatizar el deploy del frontend.
 
+- **2026-08-17 — Fix #3: inyección HTML en el correo de notificación, resuelto.** Rama `fix/escapar-html-email-notificacion`. Parte de la auditoría completa del repo pedida por Marthin (heredó el proyecto de un programador anterior que desapareció; el detalle de los 5 hallazgos vive en la bitácora de la rama `fix/doble-envio-formulario-instalacion`, hermana de esta, sin mergear todavía).
+  - **Problema**: `mailer.js` interpolaba `nombre`, `apellido`, `telefono`, `email`, `servicio`, `asunto`, `mensaje` y `tipo_formulario` directo en el HTML del correo de notificación, sin escapar. Cualquiera podía meter `<img src=x onerror=...>` (o markup roto) en el campo mensaje del formulario público y ese HTML se renderizaba tal cual en el cliente de correo del destinatario.
+  - **Fix**: se agregó `escapeHtml()` (reemplazo de `&<>"'` por sus entidades, sin dependencias nuevas) y se envolvieron todos los campos interpolados en `sendContactEmail`. Se exporta junto a `sendContactEmail` para poder testearla directo.
+  - Se agregó `backend/test/mailer.escapeHtml.test.js` (`node:test`) cubriendo el caso de inyección, caracteres especiales sueltos, valores nulos/vacíos y texto normal sin tocar. Los 3 pasan.
+
 ## Pendientes / próximos pasos
 
-- Sin pendientes de deploy del frontend por ahora — subida manual por hPanel, como antes.
+- Fixes #4 (mismatch `EMAIL_USER`/usuario SMTP hardcodeado en `mailer.js`) y #5 (WhatsApp secuencial) de la auditoría del 2026-08-17, a encarar uno por uno en ramas separadas (detalle completo en la entrada de bitácora de la rama `fix/doble-envio-formulario-instalacion`).
+- Revisar y limpiar duplicados históricos en la tabla `contactos` de producción (efecto colateral del bug #1, ya corregido pero no retroactivo).
