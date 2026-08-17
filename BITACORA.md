@@ -46,6 +46,8 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
 
 - **2026-08-14** — Tercer hipo de FTP transitorio en el día (`550 ..: No such file or directory`), esta vez en el deploy automático del merge de PR #80. Con tres errores distintos en un mismo día confirmado que no es casualidad — se agregó reintento automático (3 intentos) a `deploy-frontend.yml`, repitiendo el step con condicionales (`FTP-Deploy-Action` no tiene retry propio, y las actions genéricas de retry no envuelven steps `uses:`).
 
+- **2026-08-17 — Se dio de baja `deploy-frontend.yml`, vuelta a subida 100% manual.** Marthin decidió que la automatización (push a main + FTPS + cron cada 15 min de red de seguridad + reintentos) generó más problemas de los que resolvió — tres caídas de sitio en un solo día (14/08) contra un problema que hPanel resuelve en dos clics. Se borró el workflow completo; el frontend vuelve a subirse a mano por hPanel en cada modificación, como ya documentaba `CLAUDE.md` (el código automatizado había quedado desincronizado de esa doc, no al revés). El pendiente de contactar a soporte de Hostinger para el "Directorio root" queda cerrado por decisión, no por resolución técnica — no hace falta si no se vuelve a automatizar el deploy del frontend.
+
 ## Pendientes / próximos pasos
 
-- [ ] Arreglo de fondo pendiente: contactar soporte de Hostinger para pedir que cambien el "Directorio root" del Node.js App de `backend` a la raíz del repo (o preguntar si existe otra forma de lograrlo sin recrear la app) — eso eliminaría la necesidad de `public_html`/`deploy-frontend.yml` por completo, volviendo a la arquitectura original que el código ya asume (`index.js` sirviendo `../frontend` directo).
+- Sin pendientes de deploy del frontend por ahora — subida manual por hPanel, como antes.
