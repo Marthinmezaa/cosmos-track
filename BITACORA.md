@@ -61,7 +61,12 @@ Nunca se commitea directo a `main`. Toda tarea va en su propia rama (`feat/`, `f
   - No se agregó test (no hay suite de tests en el repo — `npm test` es un stub — y el fix es un selector de una línea, verificado leyendo el markup real de las tres páginas).
   - Pendiente: mergear vía PR (Marthin), y probablemente valga la pena limpiar a mano los duplicados ya generados en la tabla `contactos` de producción durante este último mes.
 
+- **2026-08-19 — Consulta del cliente: integrar Bancard (VPOS) para promociones y pago directo desde la web.** El cliente está en conversaciones con Bancard y preguntó puntualmente si VPOS permite débito automático. Respuesta de Bancard: no es una función lista — no hay "modo suscripción" donde Bancard cobre solo cada mes. Lo que ofrecen es el **módulo de pago con token**: en el primer pago se tokeniza la tarjeta y Bancard devuelve un `alias_token` (nunca se guarda el número real, evita meterse en alcance PCI-DSS). El débito automático hay que armarlo del lado nuestro: un proceso propio (cron) que cada mes llama a la API de cobro con ese `alias_token`, y antes de cada cobro la API obliga a listar las tarjetas tokenizadas del cliente para confirmar que el token sigue vigente.
+  - Falta aclarar con el cliente el alcance real: ¿quiere **débito automático recurrente** (suscripción mensual, requiere tokenización + cron + manejo de reintentos/fallos) o **pago único de promociones puntuales** (checkout normal de VPOS, sin tokenizar ni recurrencia — mucho más simple)? La respuesta cambia bastante el tamaño del desarrollo.
+  - Nada implementado todavía, esto es solo research/consulta.
+
 ## Pendientes / próximos pasos
 
 - Fixes #2 a #5 de la auditoría del 2026-08-17 (ver arriba), a encarar uno por uno en ramas separadas.
 - Revisar y limpiar duplicados históricos en la tabla `contactos` de producción (efecto colateral del bug #1, ya corregido pero no retroactivo).
+- Definir con el cliente el alcance de la integración de Bancard (débito automático recurrente vs. pago único de promociones) antes de arrancar el desarrollo — ver entrada 2026-08-19.
